@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
 		SandwichBoothTable[0] = ((GameObject)Instantiate(SandwichMakerBoothPrefab));
 		SandwichBoothTable[1] = ((GameObject)Instantiate(SandwichMakerBoothPrefab));
 
-		InitializeBooth (0, new Vector3 (-1.3f, 0.4f, 0.0f));
-		InitializeBooth (1, new Vector3 (1.3f, 0.4f, 0.0f));
+		InitializeBooth (0, new Vector3 (-1.3f, 0.4f, 2.0f));
+		InitializeBooth (1, new Vector3 (1.3f, 0.4f, 2.0f));
 	}
 
 	void InitializeBooth(uint booth_index, Vector3 position)
