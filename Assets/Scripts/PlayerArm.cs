@@ -94,7 +94,7 @@ public class PlayerArm : MonoBehaviour
 				move_distance = Vector3.Magnitude(move_direction);
 				move_direction.Normalize ();
 
-				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag != "BurgerItem")
+				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag == GetOpponentName())
 				{
 					ArmRigidBody.MovePosition(current_arm_position + hit_info.distance * 0.3f * move_direction);
 				}
@@ -245,15 +245,13 @@ public class PlayerArm : MonoBehaviour
 
 	void GrabDropAction()
 	{
-		RaycastHit hit;
 		ArmsManager arms_manager;
 
 		arms_manager = this.GetComponentInParent<ArmsManager> ();
 
 		if(arms_manager.HasTopping())
 		{
-
-			if(!DisableDropCollider.bounds.Contains(transform.position))
+			if(!DisableDropCollider.bounds.Contains(Hand.transform.position))
 			{
 				CurrentState = ActionState.Drop;
 				arms_manager.RequestDropTopping();
@@ -261,17 +259,26 @@ public class PlayerArm : MonoBehaviour
 		}
 		else
 		{
+			RaycastHit[] hit_table;
+
 			CurrentState = ActionState.Grab;
+
+			hit_table = Physics.RaycastAll(new Ray(Hand.transform.position, -Vector3.up));
 			
-			if (Physics.Raycast(Hand.transform.position, -Vector3.up, out hit))
+			if (hit_table.Length != 0)
 			{
-				if (hit.collider != null && hit.collider.gameObject.GetComponent<Trigger>() != null)
+				foreach(RaycastHit hit in hit_table)
 				{
-					Trigger current_topping;
+					if (hit.collider != null && hit.collider.gameObject.GetComponent<Trigger>() != null)
+					{
+						Trigger current_topping;
 
-					current_topping = hit.collider.gameObject.GetComponent<Trigger>();
+						current_topping = hit.collider.gameObject.GetComponent<Trigger>();
 
-					arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject);
+						arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject);
+
+						return;
+					}
 				}
 			}
 		}
