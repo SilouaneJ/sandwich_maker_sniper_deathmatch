@@ -7,6 +7,9 @@ TagManager:
   - ClientEnd
   - Client
   - ClientExit
+  - FirstPlayer
+  - SecondPlayer
+  - BurgerItem
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

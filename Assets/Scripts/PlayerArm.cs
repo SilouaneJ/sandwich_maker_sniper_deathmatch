@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Specialized;
 
 enum ActionState
 {
@@ -38,6 +39,7 @@ public class PlayerArm : MonoBehaviour
 	private float WaitTimer;
 	private bool BumpedOtherHasBeenNotified;
 	private Vector3 BumpStartPosition, BumpPreviousPosition, BumpEndPosition, SlappedPosition;
+	private BoxCollider DisableDropCollider;
 
 	// Use this for initialization
 	void Start ()
@@ -79,11 +81,11 @@ public class PlayerArm : MonoBehaviour
 				{
 					GrabDropAction();
 				}
-				else if (Input.GetButton(BumpButtonName))
+				else if (Input.GetButtonUp(BumpButtonName))
 				{
 					BumpAction();
 				}
-				else if (Input.GetButton(SlapButtonName))
+				else if (Input.GetButtonUp(SlapButtonName))
 				{
 					SlapAction();
 				}
@@ -92,7 +94,7 @@ public class PlayerArm : MonoBehaviour
 				move_distance = Vector3.Magnitude(move_direction);
 				move_direction.Normalize ();
 
-				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance))
+				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag != "BurgerItem")
 				{
 					ArmRigidBody.MovePosition(current_arm_position + hit_info.distance * 0.3f * move_direction);
 				}
@@ -236,9 +238,43 @@ public class PlayerArm : MonoBehaviour
 		}
 	}
 
+	public void SetBoxCollider(BoxCollider box_collider)
+	{
+		DisableDropCollider = box_collider;
+	}
+
 	void GrabDropAction()
 	{
-		CurrentState = ActionState.Grab;
+		RaycastHit hit;
+		ArmsManager arms_manager;
+
+		arms_manager = this.GetComponentInParent<ArmsManager> ();
+
+		if(arms_manager.HasTopping())
+		{
+
+			if(!DisableDropCollider.bounds.Contains(transform.position))
+			{
+				CurrentState = ActionState.Drop;
+				arms_manager.RequestDropTopping();
+			}
+		}
+		else
+		{
+			CurrentState = ActionState.Grab;
+			
+			if (Physics.Raycast(Hand.transform.position, -Vector3.up, out hit))
+			{
+				if (hit.collider != null && hit.collider.gameObject.GetComponent<Trigger>() != null)
+				{
+					Trigger current_topping;
+
+					current_topping = hit.collider.gameObject.GetComponent<Trigger>();
+
+					arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject);
+				}
+			}
+		}
 	}
 	
 	void BumpAction()
@@ -253,7 +289,16 @@ public class PlayerArm : MonoBehaviour
 	
 	void SlapAction()
 	{
-		CurrentState = ActionState.Slap;
+		Vector3 move_direction;
+		RaycastHit hit_info;
+
+		move_direction = GetOpponentDirection ();
+
+		
+		if(ArmRigidBody.SweepTest(move_direction, out hit_info, 0.1f) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
+		{
+			CurrentState = ActionState.Slap;
+		}
 	}
 
 	Vector3 FilterArmPosition(Vector3 arm_position)
@@ -348,6 +393,42 @@ public class PlayerArm : MonoBehaviour
 		}
 		
 		return new Vector3(0.0f, 0.0f, 0.0f);
+	}
+
+	Vector3 GetOpponentDirection()
+	{
+		switch(PlayerIndex)
+		{
+			case 1:
+			{
+				return new Vector3 (1.0f, 0.0f, 0.0f);
+			}
+
+			case 2:
+			{
+				return new Vector3 (-1.0f, 0.0f, 0.0f);
+			}
+		}
+		
+		return new Vector3(0.0f, 0.0f, 0.0f);
+	}
+	
+	string GetOpponentName()
+	{
+		switch(PlayerIndex)
+		{
+			case 1:
+			{
+				return "SecondPlayer";
+			}
+				
+			case 2:
+			{
+				return "FirstPlayer";
+			}
+		}
+		
+		return "None";
 	}
 
 	void OnBumpedFromOtherPlayer()

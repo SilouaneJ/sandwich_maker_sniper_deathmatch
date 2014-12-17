@@ -6,6 +6,11 @@ public class Trigger : MonoBehaviour {
 	[SerializeField]
 	private GameObject ToppingPrefab;
 
+	public GameObject GetTopping()
+	{
+		return ToppingPrefab;
+	}
+
 	void OnTriggerStay(Collider other)
 	{
 		Hand hand;
