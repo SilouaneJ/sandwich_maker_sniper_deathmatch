@@ -39,7 +39,7 @@ public class PlayerArm : MonoBehaviour
 	private float WaitTimer;
 	private bool BumpedOtherHasBeenNotified;
 	private Vector3 BumpStartPosition, BumpPreviousPosition, BumpEndPosition, SlappedPosition;
-	private BoxCollider DisableDropCollider;
+	private BoxCollider LeftDisableDropCollider, RightDisableDropCollider;
 
 	// Use this for initialization
 	void Start ()
@@ -94,7 +94,7 @@ public class PlayerArm : MonoBehaviour
 				move_distance = Vector3.Magnitude(move_direction);
 				move_direction.Normalize ();
 
-				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag == GetOpponentName())
+				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
 				{
 					ArmRigidBody.MovePosition(current_arm_position + hit_info.distance * 0.3f * move_direction);
 				}
@@ -147,7 +147,7 @@ public class PlayerArm : MonoBehaviour
 				move_distance = Vector3.Magnitude(move_direction);
 				move_direction.Normalize ();
 
-				if(!BumpedOtherHasBeenNotified && ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance))
+				if(!BumpedOtherHasBeenNotified && ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
 				{
 					OtherPlayer.OnBumpedFromOtherPlayer();
 					BumpedOtherHasBeenNotified = true;
@@ -238,9 +238,10 @@ public class PlayerArm : MonoBehaviour
 		}
 	}
 
-	public void SetBoxCollider(BoxCollider box_collider)
+	public void SetBoxCollider(BoxCollider left_box_collider, BoxCollider right_collider)
 	{
-		DisableDropCollider = box_collider;
+		LeftDisableDropCollider = left_box_collider;
+		RightDisableDropCollider = right_collider;
 	}
 
 	void GrabDropAction()
@@ -251,7 +252,7 @@ public class PlayerArm : MonoBehaviour
 
 		if(arms_manager.HasTopping())
 		{
-			if(!DisableDropCollider.bounds.Contains(Hand.transform.position))
+			if(!LeftDisableDropCollider.bounds.Contains(Hand.transform.position) && !RightDisableDropCollider.bounds.Contains(Hand.transform.position))
 			{
 				CurrentState = ActionState.Drop;
 				arms_manager.RequestDropTopping();
@@ -381,7 +382,7 @@ public class PlayerArm : MonoBehaviour
 			}
 		}
 		
-		return new Vector3(0.0f, 0.0f, 0.0f);
+		return Vector3.zero;
 	}
 
 	Vector3 GetSlappedOffset()
@@ -399,7 +400,7 @@ public class PlayerArm : MonoBehaviour
 			}
 		}
 		
-		return new Vector3(0.0f, 0.0f, 0.0f);
+		return Vector3.zero;
 	}
 
 	Vector3 GetOpponentDirection()
@@ -417,7 +418,7 @@ public class PlayerArm : MonoBehaviour
 			}
 		}
 		
-		return new Vector3(0.0f, 0.0f, 0.0f);
+		return Vector3.zero;
 	}
 	
 	string GetOpponentName()

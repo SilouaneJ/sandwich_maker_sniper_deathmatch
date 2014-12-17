@@ -8,20 +8,28 @@ public class GameManager : MonoBehaviour
 	GameObject ArmsManager;
 	
 	[SerializeField]
-	GameObject ToppingDispenserPrefab;
+	GameObject LeftToppingDispenserPrefab;
+	[SerializeField]
+	GameObject RightToppingDispenserPrefab;
 	GameObject[] ToppingDispenser;
+
+	[SerializeField]
+	GameObject OrderPrefab;
+	GameObject[] Order;
 
 	// Use this for initialization
 	void Start ()
 	{
-		ArmsManager = (GameObject)Instantiate (ArmsManagerPrefab);
-
 		ToppingDispenser = new GameObject[2];
-		ToppingDispenser [0] = (GameObject)Instantiate (ToppingDispenserPrefab, new Vector3(-0.19f, -0.3f, -0.6f), Quaternion.identity);
-		ToppingDispenser [1] = (GameObject)Instantiate (ToppingDispenserPrefab, new Vector3(0.19f, -0.3f, -0.6f), Quaternion.identity);
+		ToppingDispenser [0] = (GameObject)Instantiate (LeftToppingDispenserPrefab, new Vector3(-0.19f, -0.3f, -0.6f), Quaternion.identity);
+		ToppingDispenser [1] = (GameObject)Instantiate (RightToppingDispenserPrefab, new Vector3(0.19f, -0.3f, -0.6f), Quaternion.identity);
+		
+		ArmsManager = (GameObject)Instantiate (ArmsManagerPrefab);
+		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), ToppingDispenser [1].GetComponent< BoxCollider > ());
 
-		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), 0);
-		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [1].GetComponent< BoxCollider > (), 1);
+		Order = new GameObject[2];
+		Order[0] = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
+		Order[1] = (GameObject)Instantiate (OrderPrefab, new Vector3(0.19f, -0.32f, -0.8f), Quaternion.identity);
 	}
 	
 	// Update is called once per frame

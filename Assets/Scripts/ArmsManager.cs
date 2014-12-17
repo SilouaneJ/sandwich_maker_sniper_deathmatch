@@ -25,9 +25,10 @@ public class ArmsManager : MonoBehaviour
 		}
 	}
 
-	public void SetCollider(BoxCollider box_collider, int player_index)
+	public void SetCollider(BoxCollider left_box_collider, BoxCollider right_box_collider)
 	{
-		PlayerArms [player_index].GetComponent< PlayerArm > ().SetBoxCollider (box_collider);
+		PlayerArms [0].GetComponent< PlayerArm > ().SetBoxCollider (left_box_collider, right_box_collider);
+		PlayerArms [1].GetComponent< PlayerArm > ().SetBoxCollider (left_box_collider, right_box_collider);
 	}
 
 	public void RequestDropTopping()
@@ -48,9 +49,10 @@ public class ArmsManager : MonoBehaviour
 	void DropTopping()
 	{
 		Topping.transform.parent = null;
-		Topping.transform.localPosition -= Vector3.up * 0.1f;
+		Topping.transform.localPosition -= Vector3.up * 0.05f;
 		Topping.rigidbody.isKinematic = false;
 		Topping.rigidbody.useGravity = true;
+		Topping.rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 		Topping = null;
 		RequestGrabDrop = false;
 	}

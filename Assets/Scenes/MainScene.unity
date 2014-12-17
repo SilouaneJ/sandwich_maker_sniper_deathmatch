@@ -235,8 +235,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArmsManagerPrefab: {fileID: 100010, guid: 6ab945a89a075894b8fdb71e35f1238e, type: 2}
-  ToppingDispenserPrefab: {fileID: 100002, guid: 38f62abbb3e6f3b4abcd724bb5d2503b,
+  LeftToppingDispenserPrefab: {fileID: 100010, guid: 4b3c42325c3f14c81b7e26c7e04f890c,
     type: 2}
+  RightToppingDispenserPrefab: {fileID: 100010, guid: 9d81cd59879a34d89a3a1809abaf7ce8,
+    type: 2}
+  OrderPrefab: {fileID: 100004, guid: beb72903a383bb74489d8656477e999c, type: 2}
 --- !u!4 &1655633401
 Transform:
   m_ObjectHideFlags: 0
