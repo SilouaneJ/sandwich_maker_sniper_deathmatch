@@ -39,8 +39,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31722c0bac8554fb1951990cb38f971e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmountOfIngredients: 0
-  IngredientOrderList: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  RecipeName: Rookie XL
+  AmountOfIngredients: 4
+  IngredientOrderList:
+  - burger
+  - pickle
+  - burger
+  - salad
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
