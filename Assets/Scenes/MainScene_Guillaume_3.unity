@@ -1595,6 +1595,7 @@ MonoBehaviour:
   ConveyerPrefab: {fileID: 149262, guid: 711a29b89d185ec47b6d411897ed5446, type: 2}
   ConveyerPosition: {fileID: 115262999}
   InterfaceManager: {fileID: 847859573}
+  AudioManagerPrefab: {fileID: 137432, guid: 0b5c928da9ad48d4ba10e7f9e9d6b3da, type: 2}
 --- !u!4 &587112243
 Transform:
   m_ObjectHideFlags: 0

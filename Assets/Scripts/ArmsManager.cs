@@ -70,6 +70,7 @@ public class ArmsManager : MonoBehaviour
 		Toppings[index].transform.localPosition -= Vector3.up * 0.05f;
 		Toppings[index].rigidbody.isKinematic = false;
 		Toppings[index].rigidbody.useGravity = true;
+		Toppings [index].rigidbody.angularDrag = 1.0f;
 		Toppings[index] = null;
 		RequestGrabDrop[index] = false;
 	}

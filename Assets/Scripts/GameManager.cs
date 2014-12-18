@@ -40,11 +40,19 @@ public class GameManager : MonoBehaviour
 	[ SerializeField ] GameObject
 		InterfaceManager;
 
+	[SerializeField]
+	GameObject AudioManagerPrefab;
+	GameObject AudioManagerObject;
+	AudioManager AudioManager;
+
 	bool GameIsStarted;
 
 	void Start ()
 	{
 		GameIsStarted = false;
+
+		AudioManagerObject = (GameObject)Instantiate (AudioManagerPrefab);
+		AudioManager = AudioManagerObject.GetComponent< AudioManager > ();
 
 		InterfaceManager.GetComponent<InterfaceManager>().SetUpInterfaceManager();
 	}
@@ -99,6 +107,15 @@ public class GameManager : MonoBehaviour
 				StartGame();
 			}
 		}
+
+		if(Input.GetKeyUp("left"))
+		{
+			AudioManager.PreviousMusic();
+		}
+		else if(Input.GetKeyUp("right"))
+		{
+			AudioManager.NextMusic();
+		}
 	}
 
 	void StartGame()
@@ -115,6 +132,8 @@ public class GameManager : MonoBehaviour
 		ConveyerManager = (GameObject)Instantiate (ConveyerPrefab, ConveyerPosition.transform.position, Quaternion.identity);
 		
 		InstantiateOrderManager();
+
+		AudioManager.PlayMusic ();
 
 		GameIsStarted = true;
 
@@ -136,5 +155,10 @@ public class GameManager : MonoBehaviour
 		Destroy (Order);
 
 		GameIsStarted = false;
+	}
+
+	public void PlaySfx(SFX sfx_sound)
+	{
+		AudioManager.PlaySfx (sfx_sound);
 	}
 }
