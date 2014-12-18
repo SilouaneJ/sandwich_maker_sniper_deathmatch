@@ -337,9 +337,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1655633401}
   - 114: {fileID: 1655633400}
+  - 114: {fileID: 1655633402}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -362,9 +363,10 @@ MonoBehaviour:
     type: 2}
   LeftDispenserPosition: {fileID: 1075220181}
   RightDispenserPosition: {fileID: 1350422913}
+  OrderPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
+  OrderManagerPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
   VisibleOrderManagerPrefab: {fileID: 127470, guid: 7a769dfd28bcf4249b7655829384687f,
     type: 2}
-  OrderManagerPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
   ConveyerPrefab: {fileID: 149262, guid: 711a29b89d185ec47b6d411897ed5446, type: 2}
   ConveyerPosition: {fileID: 1069589415}
 --- !u!4 &1655633401
@@ -379,6 +381,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1655633402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655633399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2676d8af3f2c0449a2c784218c053f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2144794504
 GameObject:
   m_ObjectHideFlags: 0

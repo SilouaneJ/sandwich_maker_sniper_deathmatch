@@ -19,22 +19,24 @@ public class GameManager : MonoBehaviour
 	GameObject[] ToppingDispenser;
 
 	[SerializeField]
-	GameObject VisibleOrderManagerPrefab;
+		GameObject OrderPrefab;
+		GameObject Order;	// Use this for initialization
+
+	[SerializeField]
+		GameObject OrderManagerPrefab;
+	GameObject OrderManager;
+
+	[SerializeField]
+		GameObject VisibleOrderManagerPrefab;
 	GameObject VisibleOrderManager;
 
-	[ SerializeField ] GameObject
-		OrderManagerPrefab;
-
-	GameObject
-		OrderManager;
-
 	[SerializeField]
-	GameObject ConveyerPrefab;
-	[SerializeField]
-	GameObject ConveyerPosition;
+		GameObject ConveyerPrefab;
 	GameObject ConveyerManager;
 
-	// Use this for initialization
+	[SerializeField]
+		GameObject ConveyerPosition;
+
 	void Start ()
 	{
 		ToppingDispenser = new GameObject[2];
@@ -53,12 +55,14 @@ public class GameManager : MonoBehaviour
 
 	public void InstantiateOrderManager(){
 
-		OrderManager = Instantiate(OrderManagerPrefab,Vector3.zero,Quaternion.identity) as GameObject;
+		OrderManager = Instantiate(OrderManagerPrefab, Vector3.zero,Quaternion.identity) as GameObject;
 		OrderManager.transform.parent = this.transform;
 		OrderManager.name = "Order_Manager";
 
 		OrderManager.GetComponent<OrderManager>().SetUpOrderManager(VisibleOrderManager);
 		OrderManager.GetComponent<OrderManager>().StartOrderManager();
+		
+		Order = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
 	}
 
 	public void TriggerOrderSent(bool left_order_sent){
