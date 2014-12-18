@@ -22,7 +22,8 @@ public class Order : MonoBehaviour
 	{
 		if(TopBunIndex != -1 && !ToppingTable[TopBunIndex].GetComponent<Topping>().ItIsInHand)
 		{
-			//GameManager.TriggerOrderSent(ItIsLeft);
+			GameManager.TriggerOrderSent(ItIsLeft);
+			TopBunIndex = -1;
 		}
 	}
 

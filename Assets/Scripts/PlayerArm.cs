@@ -336,15 +336,17 @@ public class PlayerArm : MonoBehaviour
 	
 	void SlapAction()
 	{
-		Vector3 move_direction;
-		RaycastHit hit_info;
-
-		move_direction = GetOpponentDirection ();
-
-		
-		if(ArmRigidBody.SweepTest(move_direction, out hit_info, 0.1f) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
+		if(!this.GetComponentInParent<ArmsManager> ().HasTopping(PlayerIndex-1))
 		{
-			CurrentState = ActionState.Slap;
+			Vector3 move_direction;
+			RaycastHit hit_info;
+
+			move_direction = GetOpponentDirection ();
+
+			if(ArmRigidBody.SweepTest(move_direction, out hit_info, 0.1f) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
+			{
+				CurrentState = ActionState.Slap;
+			}
 		}
 	}
 
@@ -496,6 +498,7 @@ public class PlayerArm : MonoBehaviour
 			SlappedPosition = transform.position + GetSlappedOffset();
 			CurrentSpeed = 0.0f;
 			CurrentState = ActionState.Slapped;
+			this.GetComponentInParent<ArmsManager> ().RequestDropTopping(PlayerIndex-1);
 		}
 	}
 }
