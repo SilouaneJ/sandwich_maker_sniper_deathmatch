@@ -4,23 +4,34 @@ using System.Collections;
 public class ArmsManager : MonoBehaviour
 {
 	public GameObject[] PlayerArms;
-	GameObject Topping;
-	bool RequestGrabDrop;
+	GameObject[] Toppings;
+	bool[] RequestGrabDrop;
 
 	// Use this for initialization
 	void Start ()
 	{
-		RequestGrabDrop = false;
+		Toppings = new GameObject[2];
+		RequestGrabDrop = new bool[2];
+
+		for(int i = 0; i < RequestGrabDrop.Length; i++)
+		{
+			RequestGrabDrop[i] = false;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(HasTopping())
+		for(int i = 0; i < Toppings.Length; i++)
 		{
-			if(RequestGrabDrop)
+			GameObject topping = Toppings[i];
+
+			if(topping != null)
 			{
-				DropTopping();
+				if(RequestGrabDrop[i])
+				{
+					DropTopping(i);
+				}
 			}
 		}
 	}
@@ -31,33 +42,33 @@ public class ArmsManager : MonoBehaviour
 		PlayerArms [1].GetComponent< PlayerArm > ().SetBoxCollider (left_box_collider, right_box_collider);
 	}
 
-	public void RequestDropTopping()
+	public void RequestDropTopping(int index)
 	{
-		RequestGrabDrop = true;
+		RequestGrabDrop[index] = true;
 	}
 
-	public void GrabTopping(GameObject prefab, GameObject hand)
+	public void GrabTopping(GameObject prefab, GameObject hand, int index)
 	{
-		Topping = (GameObject) GameObject.Instantiate( prefab );
-		Topping.rigidbody.useGravity = false;
-		Topping.rigidbody.isKinematic = true;
-		Topping.transform.parent = hand.transform;
-		Topping.transform.localPosition = Vector3.zero;
-		Topping.tag = "BurgerItem";
+		Toppings[index] = (GameObject) GameObject.Instantiate( prefab );
+		Toppings[index].rigidbody.useGravity = false;
+		Toppings[index].rigidbody.isKinematic = true;
+		Toppings[index].transform.parent = hand.transform;
+		Toppings[index].transform.localPosition = Vector3.zero;
+		Toppings[index].tag = "BurgerItem";
 	}
 	
-	void DropTopping()
+	void DropTopping(int index)
 	{
-		Topping.transform.parent = null;
-		Topping.transform.localPosition -= Vector3.up * 0.05f;
-		Topping.rigidbody.isKinematic = false;
-		Topping.rigidbody.useGravity = true;
-		Topping = null;
-		RequestGrabDrop = false;
+		Toppings[index].transform.parent = null;
+		Toppings[index].transform.localPosition -= Vector3.up * 0.05f;
+		Toppings[index].rigidbody.isKinematic = false;
+		Toppings[index].rigidbody.useGravity = true;
+		Toppings[index] = null;
+		RequestGrabDrop[index] = false;
 	}
 	
-	public bool HasTopping()
+	public bool HasTopping(int index)
 	{
-		return Topping != null;
+		return Toppings[index] != null;
 	}
 }

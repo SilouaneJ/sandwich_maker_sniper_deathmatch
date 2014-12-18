@@ -96,7 +96,6 @@ public class PlayerArm : MonoBehaviour
 
 				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
 				{
-					Debug.Log ("Collision");
 					ArmRigidBody.MovePosition(current_arm_position + hit_info.distance * 0.3f * move_direction);
 				}
 				else
@@ -251,12 +250,12 @@ public class PlayerArm : MonoBehaviour
 
 		arms_manager = this.GetComponentInParent<ArmsManager> ();
 
-		if(arms_manager.HasTopping())
+		if(arms_manager.HasTopping(PlayerIndex-1))
 		{
 			if(!LeftDisableDropCollider.bounds.Contains(Hand.transform.position) && !RightDisableDropCollider.bounds.Contains(Hand.transform.position))
 			{
 				CurrentState = ActionState.Drop;
-				arms_manager.RequestDropTopping();
+				arms_manager.RequestDropTopping(PlayerIndex-1);
 			}
 		}
 		else
@@ -277,7 +276,7 @@ public class PlayerArm : MonoBehaviour
 
 						current_topping = hit.collider.gameObject.GetComponent<Trigger>();
 
-						arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject);
+						arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject, PlayerIndex-1);
 
 						return;
 					}

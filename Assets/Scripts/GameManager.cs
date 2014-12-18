@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
 	GameObject VisibleOrderManagerPrefab;
 	GameObject VisibleOrderManager;
 
+	[SerializeField]
+	GameObject ConveyerPrefab;
+	[SerializeField]
+	GameObject ConveyerPosition;
+	GameObject ConveyerManager;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -33,6 +39,8 @@ public class GameManager : MonoBehaviour
 		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), ToppingDispenser [1].GetComponent< BoxCollider > ());
 
 		VisibleOrderManager = (GameObject)Instantiate (VisibleOrderManagerPrefab);
+		
+		ConveyerManager = (GameObject)Instantiate (ConveyerPrefab, ConveyerPosition.transform.position, Quaternion.identity);
 	}
 	
 	// Update is called once per frame
