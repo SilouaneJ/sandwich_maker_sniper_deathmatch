@@ -76,7 +76,7 @@ public class ConveyerManager : MonoBehaviour
 	void OnTriggerExit(Collider collider)
 	{
 		Topping topping = collider.gameObject.GetComponent<Topping>();
-		
+
 		if( topping != null )
 		{
 			ObjectTable.Remove( collider.gameObject );

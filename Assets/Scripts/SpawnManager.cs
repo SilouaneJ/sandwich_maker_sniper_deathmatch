@@ -33,11 +33,10 @@ public class SpawnManager : MonoBehaviour
 			
 			if (pendant_object.Object != null)
 			{
-				PendantObjectTable[i] = pendant_object;
-				
 				if(!pendant_object.Object.GetComponent< Topping >().ItIsInHand && pendant_object.Object.GetComponent< Topping >().MustBeDestroyed)
 				{
 					pendant_object.Timer += Time.deltaTime;
+					PendantObjectTable[i] = pendant_object;
 
 					if (pendant_object.Timer > 3.0f)
 					{

@@ -83,7 +83,8 @@ public class ArmsManager : MonoBehaviour
 		Toppings [index].rigidbody.isKinematic = true;
 		Toppings [index].transform.parent = hand.transform;
 		Toppings [index].transform.localPosition = Vector3.zero;
-		Toppings[index].tag = "BurgerItem";
+		Toppings [index].tag = "BurgerItem";
+		SpawnManager.AddPendantObject (Toppings [index]);
 	}
 	
 	public bool HasTopping(int index)
