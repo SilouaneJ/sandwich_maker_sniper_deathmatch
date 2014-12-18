@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
 	GameObject LeftToppingDispenserPrefab;
 	[SerializeField]
 	GameObject RightToppingDispenserPrefab;
+
+	[ SerializeField ] GameObject
+		LeftDispenserPosition,
+		RightDispenserPosition;
+
 	GameObject[] ToppingDispenser;
 
 	[SerializeField]
@@ -21,8 +26,8 @@ public class GameManager : MonoBehaviour
 	void Start ()
 	{
 		ToppingDispenser = new GameObject[2];
-		ToppingDispenser [0] = (GameObject)Instantiate (LeftToppingDispenserPrefab, new Vector3(-0.19f, -0.3f, -0.6f), Quaternion.identity);
-		ToppingDispenser [1] = (GameObject)Instantiate (RightToppingDispenserPrefab, new Vector3(0.19f, -0.3f, -0.6f), Quaternion.identity);
+		ToppingDispenser [0] = (GameObject)Instantiate (LeftToppingDispenserPrefab, LeftDispenserPosition.transform.position, Quaternion.identity);
+		ToppingDispenser [1] = (GameObject)Instantiate (RightToppingDispenserPrefab, RightDispenserPosition.transform.position, Quaternion.identity);
 		
 		ArmsManager = (GameObject)Instantiate (ArmsManagerPrefab);
 		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), ToppingDispenser [1].GetComponent< BoxCollider > ());

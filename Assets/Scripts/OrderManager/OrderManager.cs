@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class OrderManager : MonoBehaviour {
@@ -134,19 +134,25 @@ public class OrderManager : MonoBehaviour {
 
 		if (!LeftHasOrder){
 
-			if (ClientManager.GetComponent<ClientManager>().GetLeftClientAtCounter()){
+			if (ClientManager != null){
 
-				LeftHasOrder = true;
-				InstantiateLeftOrder();
+				if (ClientManager.GetComponent<ClientManager>().GetLeftClientAtCounter()){
+
+					LeftHasOrder = true;
+					InstantiateLeftOrder();
+				}
 			}
 		}
 
 		if (!RightHasOrder){
 
-			if (ClientManager.GetComponent<ClientManager>().GetRightClientAtCounter()){
+			if (ClientManager != null){
 
-				RightHasOrder = true;
-				InstantiateRightOrder();
+				if (ClientManager.GetComponent<ClientManager>().GetRightClientAtCounter()){
+
+					RightHasOrder = true;
+					InstantiateRightOrder();
+				}
 			}
 		}
 	}

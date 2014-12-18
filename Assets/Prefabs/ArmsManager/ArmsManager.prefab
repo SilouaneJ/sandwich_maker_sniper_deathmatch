@@ -612,8 +612,8 @@ MonoBehaviour:
   Arm: {fileID: 100008}
   Hand: {fileID: 100000}
   OtherPlayer: {fileID: 11400000}
-  MinBound: {x: -.25999999, y: -.400000006}
-  MaxBound: {x: .300000012, y: .0199999996}
+  MinBound: {x: -.25999999, y: -.349999994}
+  MaxBound: {x: .239999995, y: .0199999996}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
