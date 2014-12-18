@@ -25,6 +25,7 @@ public class PlayerArm : MonoBehaviour
 	public PlayerArm OtherPlayer;
 	private Rigidbody ArmRigidBody;
 	private string ForwardAxisName, SideAxisName, GrabDropButtonName, BumpButtonName, SlapButtonName;
+	private bool LastGrabDropButtonPressed, LastBumpButtonPressed, LastSlapButtonPressed;
 	public Vector2 MinBound, MaxBound;
 	private float NormalArmSpeed = 1.0f;
 	private float MaxBumpStartVerticalSpeed = 2.5f;
@@ -51,6 +52,9 @@ public class PlayerArm : MonoBehaviour
 		BumpButtonName = "Fire2P" + PlayerIndex;
 		SlapButtonName = "JumpP" + PlayerIndex;
 		ArmRigidBody = this.GetComponent< Rigidbody > ();
+		LastGrabDropButtonPressed = false;
+		LastBumpButtonPressed = false;
+		LastSlapButtonPressed = false;
 	}
 	
 	// Update is called once per frame
@@ -79,15 +83,41 @@ public class PlayerArm : MonoBehaviour
 				
 				if (Input.GetButton(GrabDropButtonName))
 				{
-					GrabDropAction();
+					if(!LastGrabDropButtonPressed)
+					{
+						GrabDropAction();
+						LastGrabDropButtonPressed = true;
+					}
 				}
-				else if (Input.GetButtonUp(BumpButtonName))
+				else
 				{
-					BumpAction();
+					LastGrabDropButtonPressed = false;
 				}
-				else if (Input.GetButtonUp(SlapButtonName))
+
+				if (Input.GetButton(BumpButtonName))
 				{
-					SlapAction();
+					if(!LastGrabDropButtonPressed && !LastBumpButtonPressed)
+					{
+						BumpAction();
+						LastBumpButtonPressed = true;
+					}
+				}
+				else
+				{
+					LastBumpButtonPressed = false;
+				}
+
+				if (Input.GetButton(SlapButtonName))
+				{
+					if(!LastGrabDropButtonPressed && !LastBumpButtonPressed && !LastSlapButtonPressed)
+					{
+						SlapAction();
+						LastSlapButtonPressed = true;
+					}
+				}
+				else
+				{
+					LastSlapButtonPressed = false;
 				}
 
 				move_direction = new_arm_position - current_arm_position;
@@ -270,15 +300,24 @@ public class PlayerArm : MonoBehaviour
 			{
 				foreach(RaycastHit hit in hit_table)
 				{
-					if (hit.collider != null && hit.collider.gameObject.GetComponent<Trigger>() != null)
+					if(hit.distance < 1.0f && hit.collider != null)
 					{
-						Trigger current_topping;
+						if (hit.collider.gameObject.GetComponent<Trigger>() != null)
+						{
+							Trigger current_topping;
 
-						current_topping = hit.collider.gameObject.GetComponent<Trigger>();
+							current_topping = hit.collider.gameObject.GetComponent<Trigger>();
 
-						arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject, PlayerIndex-1);
+							arms_manager.GrabTopping(current_topping.GetTopping(), Hand.gameObject, PlayerIndex-1);
 
-						return;
+							return;
+						}
+						else if (hit.collider.gameObject.tag == "Patty")
+						{
+							arms_manager.GrabPatty(hit.collider.gameObject, Hand.gameObject, PlayerIndex-1);
+							
+							return;
+						}
 					}
 				}
 			}

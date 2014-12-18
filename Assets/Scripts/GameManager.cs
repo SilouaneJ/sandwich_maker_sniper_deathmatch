@@ -76,4 +76,9 @@ public class GameManager : MonoBehaviour
 
 		}
 	}
+
+	public void Test()
+	{
+		Debug.Log ("Je suis un géni");
+	}
 }

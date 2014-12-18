@@ -74,46 +74,33 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
---- !u!1 &852621425
+--- !u!1 &516725348
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 852621427}
-  - 65: {fileID: 852621426}
+  - 4: {fileID: 516725350}
   m_Layer: 0
-  m_Name: RightDispenserPosition
-  m_TagString: Untagged
+  m_Name: PattySpawnPosition
+  m_TagString: PattySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &852621426
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 852621425}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &852621427
+--- !u!4 &516725350
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 852621425}
+  m_GameObject: {fileID: 516725348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .245000005, y: -.300000012, z: -.512000024}
+  m_LocalPosition: {x: 0, y: -.300000012, z: -.400000006}
   m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
 --- !u!1 &1069589415
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,16 +140,15 @@ Transform:
   m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
---- !u!1 &1138139483
+  m_RootOrder: 4
+--- !u!1 &1075220181
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1138139485}
-  - 65: {fileID: 1138139484}
+  - 4: {fileID: 1075220183}
   m_Layer: 0
   m_Name: LeftDispenserPosition
   m_TagString: Untagged
@@ -170,30 +156,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1138139484
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1138139483}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1138139485
+--- !u!4 &1075220183
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1138139483}
+  m_GameObject: {fileID: 1075220181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.245000005, y: -.300000012, z: -.512000024}
+  m_LocalPosition: {x: -.312000006, y: -.30399999, z: -.492000014}
   m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1179195357
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +238,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1 &1350422913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1350422915}
+  m_Layer: 0
+  m_Name: RightDispenserPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350422915
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350422913}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .312000006, y: -.30399999, z: -.492000014}
+  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &1355586831
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,8 +360,8 @@ MonoBehaviour:
     type: 2}
   RightToppingDispenserPrefab: {fileID: 100010, guid: 9d81cd59879a34d89a3a1809abaf7ce8,
     type: 2}
-  LeftDispenserPosition: {fileID: 1138139483}
-  RightDispenserPosition: {fileID: 852621425}
+  LeftDispenserPosition: {fileID: 1075220181}
+  RightDispenserPosition: {fileID: 1350422913}
   VisibleOrderManagerPrefab: {fileID: 127470, guid: 7a769dfd28bcf4249b7655829384687f,
     type: 2}
   OrderManagerPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}

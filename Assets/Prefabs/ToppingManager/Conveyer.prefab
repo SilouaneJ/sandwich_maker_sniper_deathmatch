@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Model: {fileID: 149260}
+  PattyPrefab: {fileID: 100000, guid: ad2d38e9c6765b94aad7bce1dd435f68, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

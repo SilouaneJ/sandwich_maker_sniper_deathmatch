@@ -24,6 +24,7 @@ public class Order : MonoBehaviour
 		if( topping != null )
 		{
 			ToppingTable.Add( collider.gameObject );
+			topping.MustBeDestroyed = false;
 		}
 	}
 
@@ -34,6 +35,7 @@ public class Order : MonoBehaviour
 		if( topping != null )
 		{
 			ToppingTable.Remove( collider.gameObject );
+			topping.MustBeDestroyed = true;
 		}
 	}
 

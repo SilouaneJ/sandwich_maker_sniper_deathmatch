@@ -6,6 +6,7 @@ public class ArmsManager : MonoBehaviour
 	public GameObject[] PlayerArms;
 	GameObject[] Toppings;
 	bool[] RequestGrabDrop;
+	SpawnManager SpawnManager;
 
 	// Use this for initialization
 	void Start ()
@@ -17,6 +18,8 @@ public class ArmsManager : MonoBehaviour
 		{
 			RequestGrabDrop[i] = false;
 		}
+
+		SpawnManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent< SpawnManager >();
 	}
 	
 	// Update is called once per frame
@@ -50,6 +53,8 @@ public class ArmsManager : MonoBehaviour
 	public void GrabTopping(GameObject prefab, GameObject hand, int index)
 	{
 		Toppings[index] = (GameObject) GameObject.Instantiate( prefab );
+		Toppings[index].GetComponent< Topping > ().MustBeDestroyed = true;
+		Toppings[index].GetComponent< Topping > ().ItIsInHand = true;
 		Toppings[index].rigidbody.useGravity = false;
 		Toppings[index].rigidbody.isKinematic = true;
 		Toppings[index].transform.parent = hand.transform;
@@ -59,12 +64,26 @@ public class ArmsManager : MonoBehaviour
 	
 	void DropTopping(int index)
 	{
+		SpawnManager.AddPendantObject (Toppings [index]);
+		Toppings [index].GetComponent< Topping > ().ItIsInHand = false;
 		Toppings[index].transform.parent = null;
 		Toppings[index].transform.localPosition -= Vector3.up * 0.05f;
 		Toppings[index].rigidbody.isKinematic = false;
 		Toppings[index].rigidbody.useGravity = true;
 		Toppings[index] = null;
 		RequestGrabDrop[index] = false;
+	}
+
+	public void GrabPatty(GameObject burger, GameObject hand, int index)
+	{
+		Toppings [index] = burger;
+		Toppings [index].GetComponent< Topping > ().MustBeDestroyed = true;
+		Toppings [index].GetComponent< Topping > ().ItIsInHand = true;
+		Toppings [index].rigidbody.useGravity = false;
+		Toppings [index].rigidbody.isKinematic = true;
+		Toppings [index].transform.parent = hand.transform;
+		Toppings [index].transform.localPosition = Vector3.zero;
+		Toppings[index].tag = "BurgerItem";
 	}
 	
 	public bool HasTopping(int index)
