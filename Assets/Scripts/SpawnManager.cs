@@ -56,4 +56,14 @@ public class SpawnManager : MonoBehaviour
 	{
 		PendantObjectTable.Add (new PendantObject(pendant_object));
 	}
+
+	public void DestroyAll()
+	{
+		foreach(PendantObject pendant_object in PendantObjectTable)
+		{
+			Destroy (pendant_object.Object);
+		}
+
+		PendantObjectTable.Clear ();
+	}
 }

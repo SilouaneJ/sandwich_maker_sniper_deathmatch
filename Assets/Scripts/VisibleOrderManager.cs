@@ -167,4 +167,10 @@ public class VisibleOrderManager : MonoBehaviour
 		VisibleOrders[player_index].CurrentState = MoveState.StepOut;
 		VisibleOrders [player_index].OrderObject.FreezeAllToppings ();
 	}
+
+	public void DestroyAll()
+	{
+		Destroy (VisibleOrders [0].Order);
+		Destroy (VisibleOrders [1].Order);
+	}
 }

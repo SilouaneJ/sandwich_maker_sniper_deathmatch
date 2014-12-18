@@ -40,20 +40,11 @@ public class GameManager : MonoBehaviour
 	[ SerializeField ] GameObject
 		InterfaceManager;
 
+	bool GameIsStarted;
+
 	void Start ()
 	{
-		ToppingDispenser = new GameObject[2];
-		ToppingDispenser [0] = (GameObject)Instantiate (LeftToppingDispenserPrefab, LeftDispenserPosition.transform.position, Quaternion.identity);
-		ToppingDispenser [1] = (GameObject)Instantiate (RightToppingDispenserPrefab, RightDispenserPosition.transform.position, Quaternion.identity);
-		
-		ArmsManager = (GameObject)Instantiate (ArmsManagerPrefab);
-		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), ToppingDispenser [1].GetComponent< BoxCollider > ());
-
-		VisibleOrderManager = (GameObject)Instantiate (VisibleOrderManagerPrefab);
-		
-		ConveyerManager = (GameObject)Instantiate (ConveyerPrefab, ConveyerPosition.transform.position, Quaternion.identity);
-		
-		InstantiateOrderManager();
+		GameIsStarted = false;
 
 		InterfaceManager.GetComponent<InterfaceManager>().SetUpInterfaceManager();
 	}
@@ -78,13 +69,62 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
+		if(GameIsStarted)
 		{
+			if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
+			{
 
+			}
+			else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
+			{
+
+			}
+
+			if(Input.GetKey ("p"))
+			{
+				StopGame();
+			}
 		}
-		else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
+		else
 		{
-
+			if(Input.GetKey ("o"))
+			{
+				StartGame();
+			}
 		}
+	}
+
+	void StartGame()
+	{
+		ToppingDispenser = new GameObject[2];
+		ToppingDispenser [0] = (GameObject)Instantiate (LeftToppingDispenserPrefab, LeftDispenserPosition.transform.position, Quaternion.identity);
+		ToppingDispenser [1] = (GameObject)Instantiate (RightToppingDispenserPrefab, RightDispenserPosition.transform.position, Quaternion.identity);
+		
+		ArmsManager = (GameObject)Instantiate (ArmsManagerPrefab);
+		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), ToppingDispenser [1].GetComponent< BoxCollider > ());
+		
+		VisibleOrderManager = (GameObject)Instantiate (VisibleOrderManagerPrefab);
+		
+		ConveyerManager = (GameObject)Instantiate (ConveyerPrefab, ConveyerPosition.transform.position, Quaternion.identity);
+		
+		InstantiateOrderManager();
+
+		GameIsStarted = true;
+	}
+
+	void StopGame()
+	{
+		this.GetComponent<SpawnManager> ().DestroyAll ();
+		VisibleOrderManager.GetComponent< VisibleOrderManager > ().DestroyAll ();
+		Destroy(ToppingDispenser[0]);
+		Destroy(ToppingDispenser[1]);
+		Destroy (ArmsManager);
+		Destroy (VisibleOrderManager);
+		Destroy (ConveyerManager);
+
+		Destroy (OrderManager);
+		Destroy (Order);
+
+		GameIsStarted = false;
 	}
 }
