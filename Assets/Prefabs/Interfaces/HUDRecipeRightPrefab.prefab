@@ -33,7 +33,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 1
@@ -101,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100012
 GameObject:
   m_ObjectHideFlags: 1
@@ -181,6 +181,7 @@ GameObject:
   - 223: {fileID: 22300000}
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400020}
+  - 114: {fileID: 11400034}
   m_Layer: 5
   m_Name: HUDRecipeRightPrefab
   m_TagString: Untagged
@@ -671,6 +672,40 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: X3
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b600f304125a487993221f7ffac7019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BurgerImage: {fileID: 21300000, guid: ea81dbacc07c744caa20f9dea0d4cc5d, type: 3}
+  SaladImage: {fileID: 21300000, guid: 2c25447dba9fd6f40900985cc5571c42, type: 3}
+  TomatoImage: {fileID: 21300000, guid: c0583a4d89e3b3d4ca5c5ec3b4315f80, type: 3}
+  CheeseImage: {fileID: 21300000, guid: 897ebdab473319b499e763ca06687cd4, type: 3}
+  BaconImage: {fileID: 21300000, guid: 97525256dc6004cfcb0cc4eae8368a47, type: 3}
+  OnionImage: {fileID: 21300000, guid: 3e8fc37c5debeba49b002fc25e5305b1, type: 3}
+  PickleImage: {fileID: 21300000, guid: dbb09a1b8332b2641a867795da4350f6, type: 3}
+  JalapenosImage: {fileID: 21300000, guid: 4c1a7ec911149794a8e4fbe442d90f9c, type: 3}
+  RecipeName: {fileID: 100024}
+  RecipeNameShadow: {fileID: 100006}
+  RecipeNotes: {fileID: 100002}
+  IngredientsArray:
+  - {fileID: 100018}
+  - {fileID: 100008}
+  - {fileID: 100004}
+  - {fileID: 100014}
+  - {fileID: 100016}
+  IngredientsAmount:
+  - {fileID: 100012}
+  - {fileID: 100030}
+  - {fileID: 100000}
+  - {fileID: 100026}
+  - {fileID: 100028}
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 		OrderManager.transform.parent = this.transform;
 		OrderManager.name = "Order_Manager";
 
-		OrderManager.GetComponent<OrderManager>().SetUpOrderManager(VisibleOrderManager);
+		OrderManager.GetComponent<OrderManager>().SetUpOrderManager(InterfaceManager,VisibleOrderManager);
 		OrderManager.GetComponent<OrderManager>().StartOrderManager();
 		
 		Order = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
@@ -117,6 +117,8 @@ public class GameManager : MonoBehaviour
 		InstantiateOrderManager();
 
 		GameIsStarted = true;
+
+		InterfaceManager.GetComponent<InterfaceManager>().LaunchHUD();
 	}
 
 	void StopGame()

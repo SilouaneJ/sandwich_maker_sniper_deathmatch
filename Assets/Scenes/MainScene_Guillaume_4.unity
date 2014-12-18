@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adab95b30fa246a798cba7b019c7b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUDObjectPrefab: {fileID: 123386, guid: 33f590159b7f2ee44b2707ce7f5db832, type: 2}
+  HUDObjectPrefab: {fileID: 123386, guid: d3e808c0addef1c45af01df67d4b5c22, type: 2}
   LeftOrderPrefab: {fileID: 100022, guid: 3fe4cc35d667046768323fe11152c415, type: 2}
   RightOrderPrefab: {fileID: 100020, guid: 9aaee350874cc45e2b460e679f42df83, type: 2}
 --- !u!4 &380912879
@@ -1653,6 +1653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c622b8eb7ad3c4c289cab18d64b235da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainObjectPrefab: {fileID: 127638, guid: 121d1a5ac6c1a2c4ab4b8cda8e9f3a96, type: 2}
 --- !u!1 &554277418
 GameObject:
   m_ObjectHideFlags: 0

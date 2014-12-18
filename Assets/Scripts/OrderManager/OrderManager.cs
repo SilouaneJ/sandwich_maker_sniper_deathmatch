@@ -3,6 +3,9 @@ using System.Collections;
 
 public class OrderManager : MonoBehaviour {
 
+	GameObject
+		InterfaceManager;
+
 	[ SerializeField ] GameObject
 		ClientManagerPrefab,
 		ClientManagerPosition,
@@ -32,7 +35,7 @@ public class OrderManager : MonoBehaviour {
 	
 	}
 
-	public void SetUpOrderManager(GameObject visible_order_manager){
+	public void SetUpOrderManager(GameObject interface_manager, GameObject visible_order_manager){
 
 		ResetClientManager();
 		ResetRecipeManager();
@@ -41,6 +44,8 @@ public class OrderManager : MonoBehaviour {
 		ResetRightOrder();
 
 		this.GetComponent<DifficultyManager>().SetUpDifficultyManager();
+
+		InterfaceManager = interface_manager;
 
 		VisibleOrderManager = visible_order_manager;
 
@@ -168,9 +173,13 @@ public class OrderManager : MonoBehaviour {
 
 		if (left_order){
 			LeftHasOrder = false;
+			ResetLeftOrder();
+			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().ResetLeftOrder();
 		}
 		else if (!left_order){
 			RightHasOrder = false;
+			ResetRightOrder();
+			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().ResetRightOrder();
 		}
 
 		Debug.Log(LeftHasOrder);
@@ -196,6 +205,8 @@ public class OrderManager : MonoBehaviour {
 
 						LeftHasOrder = true;
 						InstantiateLeftOrder();
+
+						InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().InstantiateLeftOrder(LeftOrder);
 					}
 				}
 			}
@@ -221,6 +232,8 @@ public class OrderManager : MonoBehaviour {
 
 						RightHasOrder = true;
 						InstantiateRightOrder();
+						
+						InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().InstantiateRightOrder(RightOrder);
 					}
 				}
 			}
