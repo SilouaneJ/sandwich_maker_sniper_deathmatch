@@ -363,6 +363,7 @@ MonoBehaviour:
   RightDispenserPosition: {fileID: 852621425}
   VisibleOrderManagerPrefab: {fileID: 127470, guid: 7a769dfd28bcf4249b7655829384687f,
     type: 2}
+  OrderManagerPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
   ConveyerPrefab: {fileID: 149262, guid: 711a29b89d185ec47b6d411897ed5446, type: 2}
   ConveyerPosition: {fileID: 1069589415}
 --- !u!4 &1655633401
