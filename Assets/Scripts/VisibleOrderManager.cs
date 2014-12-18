@@ -159,6 +159,11 @@ public class VisibleOrderManager : MonoBehaviour
 
 	public void PushNewPlate(int player_index)
 	{
+		if(VisibleOrders[player_index].CurrentState == MoveState.StepOut)
+		{
+			VisibleOrders[player_index].OrderObject.DestroyAllToppings();
+		}
+
 		VisibleOrders[player_index].CurrentState = MoveState.StepIn;
 	}
 	
