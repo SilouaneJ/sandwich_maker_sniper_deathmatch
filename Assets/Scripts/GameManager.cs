@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 	GameObject[] ToppingDispenser;
 
 	[SerializeField]
-	GameObject OrderPrefab;
-	GameObject[] Order;
+	GameObject VisibleOrderManagerPrefab;
+	GameObject VisibleOrderManager;
 
 	// Use this for initialization
 	void Start ()
@@ -27,14 +27,11 @@ public class GameManager : MonoBehaviour
 		ArmsManager = (GameObject)Instantiate (ArmsManagerPrefab);
 		ArmsManager.GetComponent< ArmsManager > ().SetCollider (ToppingDispenser [0].GetComponent< BoxCollider > (), ToppingDispenser [1].GetComponent< BoxCollider > ());
 
-		Order = new GameObject[2];
-		Order[0] = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
-		Order[1] = (GameObject)Instantiate (OrderPrefab, new Vector3(0.19f, -0.32f, -0.8f), Quaternion.identity);
+		VisibleOrderManager = (GameObject)Instantiate (VisibleOrderManagerPrefab);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-	
 	}
 }

@@ -52,7 +52,6 @@ public class ArmsManager : MonoBehaviour
 		Topping.transform.localPosition -= Vector3.up * 0.05f;
 		Topping.rigidbody.isKinematic = false;
 		Topping.rigidbody.useGravity = true;
-		Topping.rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 		Topping = null;
 		RequestGrabDrop = false;
 	}

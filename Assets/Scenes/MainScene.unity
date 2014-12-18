@@ -239,7 +239,8 @@ MonoBehaviour:
     type: 2}
   RightToppingDispenserPrefab: {fileID: 100010, guid: 9d81cd59879a34d89a3a1809abaf7ce8,
     type: 2}
-  OrderPrefab: {fileID: 100004, guid: beb72903a383bb74489d8656477e999c, type: 2}
+  VisibleOrderManagerPrefab: {fileID: 127470, guid: 7a769dfd28bcf4249b7655829384687f,
+    type: 2}
 --- !u!4 &1655633401
 Transform:
   m_ObjectHideFlags: 0

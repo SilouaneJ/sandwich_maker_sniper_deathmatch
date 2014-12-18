@@ -7,13 +7,14 @@ public class Order : MonoBehaviour
 	private List<Topping> ToppingTable;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		ToppingTable = new List<Topping>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -38,11 +39,28 @@ public class Order : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
-
 	}
 
 	void OnCollisionExit(Collision collision)
 	{
 	}
 
+	public void FreezeAllToppings()
+	{
+		foreach(Topping topping in ToppingTable)
+		{
+			topping.transform.parent = this.transform;
+		}
+	}
+
+	public void DestroyAllToppings()
+	{
+		Debug.Log ("Destroy ");
+		foreach(Topping topping in ToppingTable)
+		{
+			Destroy(topping);
+		}
+
+		ToppingTable.Clear ();
+	}
 }

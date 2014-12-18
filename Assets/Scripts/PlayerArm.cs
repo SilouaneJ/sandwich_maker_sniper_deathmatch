@@ -343,7 +343,7 @@ public class PlayerArm : MonoBehaviour
 		float previous_speed, remaining_distance, traveled_distance;
 		Vector3 direction;
 		
-		direction = got_to_position - transform.position;
+		direction = got_to_position - arm_position;
 		remaining_distance = Vector3.Magnitude(direction);
 		direction.Normalize();
 		
