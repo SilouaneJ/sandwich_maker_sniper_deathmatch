@@ -315,7 +315,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412323337}
-  - 65: {fileID: 412323336}
   m_Layer: 0
   m_Name: ConveyerPosition
   m_TagString: Untagged
@@ -323,18 +322,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &412323336
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 412323335}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &412323337
 Transform:
   m_ObjectHideFlags: 0
@@ -413,7 +400,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 465240427}
-  - 65: {fileID: 465240426}
   m_Layer: 0
   m_Name: RightDispenserPosition
   m_TagString: Untagged
@@ -421,18 +407,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &465240426
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 465240425}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &465240427
 Transform:
   m_ObjectHideFlags: 0
@@ -2248,9 +2222,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1655633401}
   - 114: {fileID: 1655633400}
+  - 114: {fileID: 1655633402}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2273,9 +2248,10 @@ MonoBehaviour:
     type: 2}
   LeftDispenserPosition: {fileID: 2139957254}
   RightDispenserPosition: {fileID: 465240425}
+  OrderPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
+  OrderManagerPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
   VisibleOrderManagerPrefab: {fileID: 127470, guid: 7a769dfd28bcf4249b7655829384687f,
     type: 2}
-  OrderManagerPrefab: {fileID: 100000, guid: 40084671e6b3d43b3ab42fffe3e903c0, type: 2}
   ConveyerPrefab: {fileID: 149262, guid: 711a29b89d185ec47b6d411897ed5446, type: 2}
   ConveyerPosition: {fileID: 412323335}
 --- !u!4 &1655633401
@@ -2290,6 +2266,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1655633402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655633399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2676d8af3f2c0449a2c784218c053f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693148994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,6 +3063,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1044715613}
   m_GameObject: {fileID: 2107478248}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2120849842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2120849843}
+  m_Layer: 0
+  m_Name: PattySpawnPosition
+  m_TagString: PattySpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2120849843
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2120849842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.300000012, z: -.400000006}
+  m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &2139957254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3084,7 +3098,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2139957256}
-  - 65: {fileID: 2139957255}
   m_Layer: 0
   m_Name: LeftDispenserPosition
   m_TagString: Untagged
@@ -3092,18 +3105,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &2139957255
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2139957254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2139957256
 Transform:
   m_ObjectHideFlags: 0
