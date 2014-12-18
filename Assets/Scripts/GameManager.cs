@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
 	{
 		this.GetComponent<SpawnManager> ().DestroyAll ();
 		VisibleOrderManager.GetComponent< VisibleOrderManager > ().DestroyAll ();
+		OrderManager.GetComponent< OrderManager > ().ResetOrderManager ();
 		Destroy(ToppingDispenser[0]);
 		Destroy(ToppingDispenser[1]);
 		Destroy (ArmsManager);
