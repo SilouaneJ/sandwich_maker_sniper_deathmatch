@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: OrderManagerPrefab
   m_TagString: Untagged
@@ -40,8 +41,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.98999977}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .208000004, y: .208000004, z: .208000004}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: -1.09000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -98,7 +99,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClientManagerPrefab: {fileID: 100012, guid: 1273a42063138401d9beaca4913166b4, type: 2}
   ClientManagerPosition: {fileID: 100002}
-  RecipeManagerPrefab: {fileID: 0}
+  RecipeManagerPrefab: {fileID: 100000, guid: 5a622a37f979e45f7af28295097c1f88, type: 2}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603bc8865a568495fb2767c4ab35fe66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

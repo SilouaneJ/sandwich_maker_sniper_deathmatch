@@ -50,7 +50,9 @@ public class OrderManager : MonoBehaviour {
 
 	public void InstantiateClientManager(){
 
-		ClientManager = Instantiate(ClientManagerPrefab,ClientManagerPosition.transform.position,Quaternion.identity) as GameObject;
+		Quaternion client_manager_orientation = ClientManagerPrefab.transform.rotation;
+
+		ClientManager = Instantiate(ClientManagerPrefab,ClientManagerPosition.transform.position,client_manager_orientation) as GameObject;
 		ClientManager.transform.parent = this.transform;
 		ClientManager.name = "Client_Manager";
 
