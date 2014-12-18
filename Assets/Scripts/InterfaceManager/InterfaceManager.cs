@@ -26,6 +26,7 @@ public class InterfaceManager : MonoBehaviour {
 
 		HUDManager.GetComponent<HUDManager>().SetUpHUDManager();
 		MainManager.GetComponent<MainManager>().SetUpMainManager();
+		ScoreManager.GetComponent<ScoreManager>().SetUpScoreManager();
 	}
 
 	public void LaunchMain(){
@@ -46,6 +47,11 @@ public class InterfaceManager : MonoBehaviour {
 	public void ResetHUD(){
 
 		HUDManager.GetComponent<HUDManager>().ResetHUDManager();
+	}
+
+	public void LaunchScore(){
+
+		ScoreManager.GetComponent<ScoreManager>().StartScoreManager(false,500,1500);
 	}
 
 	public GameObject GetHUDManager(){
