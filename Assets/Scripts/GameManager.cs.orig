@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
@@ -76,7 +76,16 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (GameIsStarted)
+<<<<<<< Updated upstream
+		if(GameIsStarted)
+=======
+
+		if (Input.GetKeyDown("a")){
+			TriggerOrderSent(true);
+		}
+
+		if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
+>>>>>>> Stashed changes
 		{
 			if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
 			{

@@ -48,6 +48,15 @@ public class OrderManager : MonoBehaviour {
 		RightPlayerShot = false;
 	}
 
+	public void ResetOrderManager(){
+
+		ResetClientManager();
+		ResetRecipeManager();
+
+		ResetLeftOrder();
+		ResetRightOrder();
+	}
+
 	public void StartOrderManager(){
 
 		ResetClientManager();
@@ -157,16 +166,14 @@ public class OrderManager : MonoBehaviour {
 
 	public void OrderSent(bool left_order){
 
-		GameObject order_object = new GameObject();
-
 		if (left_order){
-			order_object = LeftOrder;
 			LeftHasOrder = false;
 		}
 		else if (!left_order){
-			order_object = RightOrder;
 			RightHasOrder = false;
 		}
+
+		Debug.Log(LeftHasOrder);
 
 		ClientManager.GetComponent<ClientManager>().TriggerClientServed(left_order);
 	}
@@ -185,16 +192,22 @@ public class OrderManager : MonoBehaviour {
 
 				if (ClientManager.GetComponent<ClientManager>().GetLeftClientAtCounter()){
 
-					LeftHasOrder = true;
-					InstantiateLeftOrder();
+					if (!LeftHasOrder){
+
+						LeftHasOrder = true;
+						InstantiateLeftOrder();
+					}
 				}
 			}
 		}
 		else if (LeftHasOrder){
 
 			if (ClientManager.GetComponent<ClientManager>().GetLeftClientObjectAtCounter().GetComponent<ClientObject>().GetIsShooting()){
-				LeftPlayerShot = true;
-				LeftHasOrder = false;
+
+				if (!LeftPlayerShot){
+
+					LeftPlayerShot = true;
+				}
 			}
 		}
 
@@ -204,16 +217,22 @@ public class OrderManager : MonoBehaviour {
 
 				if (ClientManager.GetComponent<ClientManager>().GetRightClientAtCounter()){
 
-					RightHasOrder = true;
-					InstantiateRightOrder();
+					if (!RightHasOrder){
+
+						RightHasOrder = true;
+						InstantiateRightOrder();
+					}
 				}
 			}
 		}
 		else if (RightHasOrder){
 			
 			if (ClientManager.GetComponent<ClientManager>().GetRightClientObjectAtCounter().GetComponent<ClientObject>().GetIsShooting()){
-				RightPlayerShot = true;
-				RightHasOrder = false;
+
+				if (!RightPlayerShot){
+
+					RightPlayerShot = true;
+				}
 			}
 		}
 	}
