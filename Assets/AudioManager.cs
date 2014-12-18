@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 enum AudioState
 {
@@ -28,16 +29,20 @@ public class AudioManager : MonoBehaviour
 	AudioClip[] MusicTable;
 	int CurrentMusic, FollowingtMusic, CurrentSource, FollowingSource;
 	AudioSource[] SourceTable;
+	List<AudioSource> SFXSourceTable;
 	[SerializeField]
 	AudioClip[] SFXTable;
 	AudioState MusicState;
 	float MusicFadeSpeed = 0.5f;
 	float MusicMaximumVolume = 0.6f;
 	float SFXMaximumVolume = 0.8f;
+	[SerializeField]
+	GameObject SfxSourcePrefab;
 
 	// Use this for initialization
 	void Start ()
 	{
+		SFXSourceTable = new List< AudioSource > ();
 		MusicState = AudioState.NotPlaying;
 		CurrentMusic = 0;
 		SourceTable = this.GetComponents< AudioSource > ();
@@ -55,6 +60,16 @@ public class AudioManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		for(int i = 0; i < SFXSourceTable.Count; i++)
+		{
+			if(!SFXSourceTable[i].isPlaying)
+			{
+				Destroy (SFXSourceTable[i].gameObject);
+				SFXSourceTable.RemoveAt(i);
+				i--;
+			}
+		}
+
 		switch(MusicState)
 		{
 			case AudioState.FadeIn:
@@ -169,7 +184,19 @@ public class AudioManager : MonoBehaviour
 		{
 			SourceTable[CurrentSource].clip = MusicTable [CurrentMusic];
 			SourceTable[CurrentSource].Play ();
-			Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
+			Invoke("NextMusic", SourceTable[CurrentSource].clip.length - 5.0f);
+		}
+	}
+
+	public void StopMusic()
+	{
+		MusicState = AudioState.FadeOut;
+		
+		if(FollowingSource != -1)
+		{
+			SourceTable[FollowingSource].volume = 0.0f;
+			SourceTable[FollowingSource].Stop();
+			FollowingSource = -1;
 		}
 	}
 
@@ -217,8 +244,17 @@ public class AudioManager : MonoBehaviour
 
 	public void PlaySfx(SFX audio_sfx)
 	{
-		SourceTable [2].volume = SFXMaximumVolume;
-		SourceTable [2].clip = SFXTable [(int)audio_sfx];
-		SourceTable [2].Play ();
+		GameObject new_sfx;
+		AudioSource new_source;
+
+		new_sfx = (GameObject)Instantiate (SfxSourcePrefab);
+
+		new_source = new_sfx.GetComponent< AudioSource > ();
+		Debug.Log (new_source);
+		new_source.volume = SFXMaximumVolume;
+		new_source.clip = SFXTable [(int)audio_sfx];
+		new_source.Play ();
+
+		SFXSourceTable.Add (new_source);
 	}
 }

@@ -88,11 +88,13 @@ public class GameManager : MonoBehaviour
 		{
 			if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
 			{
-
+				PlaySfx(SFX.Gun);
+				StopGame();
 			}
 			else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
 			{
-
+				PlaySfx(SFX.Gun);
+				StopGame();
 			}
 
 			if(Input.GetKey ("p"))
@@ -142,6 +144,7 @@ public class GameManager : MonoBehaviour
 
 	void StopGame()
 	{
+		AudioManager.StopMusic ();
 		this.GetComponent<SpawnManager> ().DestroyAll ();
 		VisibleOrderManager.GetComponent< VisibleOrderManager > ().DestroyAll ();
 		OrderManager.GetComponent< OrderManager > ().ResetOrderManager ();

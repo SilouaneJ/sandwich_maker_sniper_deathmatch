@@ -30,9 +30,12 @@ public class OrderManager : MonoBehaviour {
 		LeftPlayerShot,
 		RightPlayerShot;
 
+	GameManager GameManager;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+	{
+		GameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent< GameManager > ();
 	}
 
 	public void SetUpOrderManager(GameObject interface_manager, GameObject visible_order_manager){
@@ -170,6 +173,7 @@ public class OrderManager : MonoBehaviour {
 	}
 
 	public void OrderSent(bool left_order){
+		GameManager.PlaySfx (SFX.Money);
 
 		if (left_order){
 			LeftHasOrder = false;

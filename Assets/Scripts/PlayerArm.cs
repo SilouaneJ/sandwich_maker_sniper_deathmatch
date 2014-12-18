@@ -41,6 +41,7 @@ public class PlayerArm : MonoBehaviour
 	private bool BumpedOtherHasBeenNotified;
 	private Vector3 BumpStartPosition, BumpPreviousPosition, BumpEndPosition, SlappedPosition;
 	private BoxCollider LeftDisableDropCollider, RightDisableDropCollider;
+	private GameManager GameManager;
 
 	// Use this for initialization
 	void Start ()
@@ -55,6 +56,7 @@ public class PlayerArm : MonoBehaviour
 		LastGrabDropButtonPressed = false;
 		LastBumpButtonPressed = false;
 		LastSlapButtonPressed = false;
+		GameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent< GameManager >();
 	}
 	
 	// Update is called once per frame
@@ -294,6 +296,8 @@ public class PlayerArm : MonoBehaviour
 
 			CurrentState = ActionState.Grab;
 
+			GameManager.PlaySfx (SFX.Grab);
+			
 			hit_table = Physics.RaycastAll(new Ray(Hand.transform.position, -Vector3.up));
 			
 			if (hit_table.Length != 0)
@@ -345,6 +349,7 @@ public class PlayerArm : MonoBehaviour
 
 			if(ArmRigidBody.SweepTest(move_direction, out hit_info, 0.1f) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
 			{
+				GameManager.PlaySfx (SFX.Slap1);
 				CurrentState = ActionState.Slap;
 			}
 		}
