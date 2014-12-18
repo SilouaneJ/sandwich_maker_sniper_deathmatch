@@ -96,6 +96,7 @@ public class PlayerArm : MonoBehaviour
 
 				if(ArmRigidBody.SweepTest(move_direction, out hit_info, move_distance) && hit_info.collider.gameObject.tag.Equals(GetOpponentName()))
 				{
+					Debug.Log ("Collision");
 					ArmRigidBody.MovePosition(current_arm_position + hit_info.distance * 0.3f * move_direction);
 				}
 				else

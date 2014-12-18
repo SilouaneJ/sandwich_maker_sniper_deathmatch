@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class Order : MonoBehaviour 
 {
-	private List<Topping> ToppingTable;
+	private List<GameObject> ToppingTable;
 
 	// Use this for initialization
 	void Start ()
 	{
-		ToppingTable = new List<Topping>();
+		ToppingTable = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class Order : MonoBehaviour
 
 		if( topping != null )
 		{
-			ToppingTable.Add( topping );
+			ToppingTable.Add( collider.gameObject );
 		}
 	}
 
@@ -33,7 +33,7 @@ public class Order : MonoBehaviour
 
 		if( topping != null )
 		{
-			ToppingTable.Remove( topping );
+			ToppingTable.Remove( collider.gameObject );
 		}
 	}
 
@@ -47,7 +47,7 @@ public class Order : MonoBehaviour
 
 	public void FreezeAllToppings()
 	{
-		foreach(Topping topping in ToppingTable)
+		foreach(GameObject topping in ToppingTable)
 		{
 			topping.transform.parent = this.transform;
 		}
@@ -55,8 +55,7 @@ public class Order : MonoBehaviour
 
 	public void DestroyAllToppings()
 	{
-		Debug.Log ("Destroy ");
-		foreach(Topping topping in ToppingTable)
+		foreach(GameObject topping in ToppingTable)
 		{
 			Destroy(topping);
 		}
