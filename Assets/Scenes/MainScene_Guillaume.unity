@@ -2254,6 +2254,7 @@ MonoBehaviour:
     type: 2}
   ConveyerPrefab: {fileID: 149262, guid: 711a29b89d185ec47b6d411897ed5446, type: 2}
   ConveyerPosition: {fileID: 412323335}
+  InterfaceManager: {fileID: 1037856324}
 --- !u!4 &1655633401
 Transform:
   m_ObjectHideFlags: 0

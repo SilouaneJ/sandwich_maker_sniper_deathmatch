@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 		GameObject ConveyerPosition;
 
+	[ SerializeField ] GameObject
+		InterfaceManager;
+
 	void Start ()
 	{
 		ToppingDispenser = new GameObject[2];
@@ -51,6 +54,8 @@ public class GameManager : MonoBehaviour
 		ConveyerManager = (GameObject)Instantiate (ConveyerPrefab, ConveyerPosition.transform.position, Quaternion.identity);
 		
 		InstantiateOrderManager();
+
+		InterfaceManager.GetComponent<InterfaceManager>().SetUpInterfaceManager();
 	}
 
 	public void InstantiateOrderManager(){
@@ -76,7 +81,7 @@ public class GameManager : MonoBehaviour
 		if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot()){
 
 		}
-		else if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot()){
+		else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot()){
 
 		}
 	}

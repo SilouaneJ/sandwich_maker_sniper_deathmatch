@@ -25,6 +25,7 @@ public class InterfaceManager : MonoBehaviour {
 		InScore = false;
 
 		HUDManager.GetComponent<HUDManager>().SetUpHUDManager();
+		HUDManager.GetComponent<HUDManager>().StartHUDManager();
 	}
 
 	public void LaunchHUD(){
