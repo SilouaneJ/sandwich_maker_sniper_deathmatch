@@ -182,7 +182,13 @@ public class ClientManager : MonoBehaviour {
 	}
 
 	public GameObject GetLeftClientObjectAtCounter(){
-		GameObject left_client_object_at_counter = LeftQueue[LeftWaiting];
+
+		GameObject left_client_object_at_counter = null;
+
+		if (LeftWaiting >= 0){
+			left_client_object_at_counter = LeftQueue[LeftWaiting];
+		}
+
 		return left_client_object_at_counter;
 	}
 

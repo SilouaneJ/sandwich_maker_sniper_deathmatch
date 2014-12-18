@@ -70,24 +70,21 @@ public class GameManager : MonoBehaviour
 		Order = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
 	}
 
-	public void TriggerOrderSent(bool left_order_sent){
-
+	public void TriggerOrderSent(bool left_order_sent)
+	{
 		OrderManager.GetComponent<OrderManager>().OrderSent(left_order_sent);
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot()){
+		if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
+		{
 
 		}
-		else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot()){
+		else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
+		{
 
 		}
-	}
-
-	public void Test()
-	{
-		Debug.Log ("Je suis un géni");
 	}
 }

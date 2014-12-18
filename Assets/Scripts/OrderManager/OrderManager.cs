@@ -161,9 +161,11 @@ public class OrderManager : MonoBehaviour {
 
 		if (left_order){
 			order_object = LeftOrder;
+			LeftHasOrder = false;
 		}
 		else if (!left_order){
 			order_object = RightOrder;
+			RightHasOrder = false;
 		}
 
 		ClientManager.GetComponent<ClientManager>().TriggerClientServed(left_order);
@@ -192,6 +194,7 @@ public class OrderManager : MonoBehaviour {
 
 			if (ClientManager.GetComponent<ClientManager>().GetLeftClientObjectAtCounter().GetComponent<ClientObject>().GetIsShooting()){
 				LeftPlayerShot = true;
+				LeftHasOrder = false;
 			}
 		}
 
@@ -210,6 +213,7 @@ public class OrderManager : MonoBehaviour {
 			
 			if (ClientManager.GetComponent<ClientManager>().GetRightClientObjectAtCounter().GetComponent<ClientObject>().GetIsShooting()){
 				RightPlayerShot = true;
+				RightHasOrder = false;
 			}
 		}
 	}

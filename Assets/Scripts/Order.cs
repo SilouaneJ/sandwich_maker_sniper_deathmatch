@@ -5,16 +5,25 @@ using System.Collections.Generic;
 public class Order : MonoBehaviour 
 {
 	private List<GameObject> ToppingTable;
+	private int TopBunIndex;
+	private GameManager GameManager;
+	public bool ItIsLeft;
 
 	// Use this for initialization
 	void Start ()
 	{
 		ToppingTable = new List<GameObject>();
+		TopBunIndex = -1;
+		GameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent< GameManager >();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if(TopBunIndex != -1 && !ToppingTable[TopBunIndex].GetComponent<Topping>().ItIsInHand)
+		{
+			//GameManager.TriggerOrderSent(ItIsLeft);
+		}
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -25,6 +34,11 @@ public class Order : MonoBehaviour
 		{
 			ToppingTable.Add( collider.gameObject );
 			topping.MustBeDestroyed = false;
+
+			if(topping.Type == ToppingType.BUN)
+			{
+				TopBunIndex = ToppingTable.Count - 1;
+			}
 		}
 	}
 
@@ -36,15 +50,12 @@ public class Order : MonoBehaviour
 		{
 			ToppingTable.Remove( collider.gameObject );
 			topping.MustBeDestroyed = true;
+
+			if(topping.Type == ToppingType.BUN)
+			{
+				TopBunIndex = -1;
+			}
 		}
-	}
-
-	void OnCollisionEnter(Collision collision)
-	{
-	}
-
-	void OnCollisionExit(Collision collision)
-	{
 	}
 
 	public void FreezeAllToppings()
@@ -63,5 +74,6 @@ public class Order : MonoBehaviour
 		}
 
 		ToppingTable.Clear ();
+		TopBunIndex = -1;
 	}
 }

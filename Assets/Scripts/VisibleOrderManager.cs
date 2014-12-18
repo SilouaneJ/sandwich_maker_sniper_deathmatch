@@ -18,7 +18,7 @@ struct VisibleOrder
 	public float CurrentSpeed;
 	public Order OrderObject;
 
-	public VisibleOrder(Vector3 in_pos, Vector3 out_pos, GameObject prefab)
+	public VisibleOrder(Vector3 in_pos, Vector3 out_pos, GameObject prefab, bool it_is_left)
 	{
 		CurrentState = MoveState.Out;
 		InOutPositions = new Vector3[2];
@@ -28,6 +28,7 @@ struct VisibleOrder
 
 		Order = (GameObject)GameObject.Instantiate (prefab, InOutPositions[1], Quaternion.identity);
 		OrderObject = Order.GetComponent< Order > ();
+		OrderObject.ItIsLeft = it_is_left;
 	}
 }
 
@@ -45,8 +46,8 @@ public class VisibleOrderManager : MonoBehaviour
 	void Start ()
 	{
 		VisibleOrders = new VisibleOrder[2];
-		VisibleOrders [0] = new VisibleOrder (OrderStartPosition[0].transform.position,OrderEndPosition[0].transform.position,OrderPrefab);
-		VisibleOrders [1] = new VisibleOrder (OrderStartPosition[1].transform.position,OrderEndPosition[1].transform.position,OrderPrefab);
+		VisibleOrders [0] = new VisibleOrder (OrderStartPosition[0].transform.position,OrderEndPosition[0].transform.position,OrderPrefab, true);
+		VisibleOrders [1] = new VisibleOrder (OrderStartPosition[1].transform.position,OrderEndPosition[1].transform.position,OrderPrefab, false);
 	}
 	
 	// Update is called once per frame
