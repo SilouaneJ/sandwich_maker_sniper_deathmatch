@@ -181,6 +181,16 @@ public class ClientManager : MonoBehaviour {
 		return right_client_at_counter;
 	}
 
+	public GameObject GetLeftClientObjectAtCounter(){
+		GameObject left_client_object_at_counter = LeftQueue[LeftWaiting];
+		return left_client_object_at_counter;
+	}
+
+	public GameObject GetRightClientObjectAtCounter(){
+		GameObject right_client_object_at_counter = RightQueue[RightWaiting];
+		return right_client_object_at_counter;
+	}
+
 	// Update is called once per frame
 	void Update () {
 

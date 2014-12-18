@@ -3,6 +3,21 @@ using System.Collections;
 
 public class ClientObject : MonoBehaviour {
 
+	[ SerializeField ] GameObject[]
+		ClientStates = new GameObject[4];
+
+	int
+		CurrentState;
+
+	[ SerializeField ] int
+		MaximumState;
+
+	[ SerializeField ] float[]
+		StatesTimer = new float[4];
+
+	float
+		StateClock;
+
 	[ SerializeField ] float
 		MoveSpeed;
 
@@ -20,7 +35,8 @@ public class ClientObject : MonoBehaviour {
 		IsServed,
 		IsWaiting,
 		IsMoving,
-		IsDone;
+		IsDone,
+		IsShooting;
 
 	[ SerializeField ] float
 		WaitingTimer;
@@ -39,7 +55,26 @@ public class ClientObject : MonoBehaviour {
 		IsMoving = false;
 		IsDone = false;
 
+		IsShooting = false;
+
 		MoveDirection = QueueDirection;
+
+		CurrentState = 0;
+
+		UpdateClientState(CurrentState);
+	}
+
+	public void UpdateClientState(int new_client_state){
+
+		for (int i=0; i < ClientStates.Length; i++){
+
+			if (i == new_client_state){
+				ClientStates[i].renderer.enabled = true;
+			}
+			else if (i != new_client_state){
+				ClientStates[i].renderer.enabled = false;
+			}
+		}
 	}
 
 	public void StartClientMoving(){
@@ -80,7 +115,12 @@ public class ClientObject : MonoBehaviour {
 		bool is_served = IsServed;
 		return is_served;
 	}
-	
+
+	public bool GetIsShooting(){
+		bool is_shooting = IsShooting;
+		return is_shooting;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -89,6 +129,25 @@ public class ClientObject : MonoBehaviour {
 			Vector3 client_position = this.transform.position;
 			client_position += MoveDirection * Time.deltaTime;
 			this.transform.position = client_position;
+		}
+		else if (IsWaiting){
+
+			StateClock += Time.deltaTime;
+
+			if (StateClock >= StatesTimer[CurrentState]){
+
+				CurrentState++;
+				StateClock = 0.0f;
+
+				if (CurrentState >= MaximumState){
+
+					CurrentState = MaximumState - 1;
+					IsShooting = true;
+
+				}
+
+				UpdateClientState(CurrentState);
+			}
 		}
 	}
 

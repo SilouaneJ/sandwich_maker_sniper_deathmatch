@@ -20,12 +20,19 @@ public class OrderManager : MonoBehaviour {
 		LeftOrder,
 		RightOrder;
 
+	GameObject
+		VisibleOrderManager;
+
+	bool
+		LeftPlayerShot,
+		RightPlayerShot;
+
 	// Use this for initialization
 	void Start () {
 	
 	}
 
-	public void SetUpOrderManager(){
+	public void SetUpOrderManager(GameObject visible_order_manager){
 
 		ResetClientManager();
 		ResetRecipeManager();
@@ -34,6 +41,11 @@ public class OrderManager : MonoBehaviour {
 		ResetRightOrder();
 
 		this.GetComponent<DifficultyManager>().SetUpDifficultyManager();
+
+		VisibleOrderManager = visible_order_manager;
+
+		LeftPlayerShot = false;
+		RightPlayerShot = false;
 	}
 
 	public void StartOrderManager(){
@@ -46,6 +58,9 @@ public class OrderManager : MonoBehaviour {
 
 		ResetLeftOrder();
 		ResetRightOrder();
+
+		LeftPlayerShot = false;
+		RightPlayerShot = false;
 	}
 
 	public void InstantiateClientManager(){
@@ -104,6 +119,8 @@ public class OrderManager : MonoBehaviour {
 
 		int left_order_id = this.GetComponent<DifficultyManager>().GetLeftRecipeID();
 		LeftOrder = RecipeManager.GetComponent<RecipeManager>().InstantiateRecipeObject(left_order_id);
+
+		VisibleOrderManager.GetComponent<VisibleOrderManager>().PushNewPlate(0);
 	}
 
 	public void InstantiateRightOrder(){
@@ -114,6 +131,8 @@ public class OrderManager : MonoBehaviour {
 
 		int right_order_id = this.GetComponent<DifficultyManager>().GetLeftRecipeID();
 		RightOrder = RecipeManager.GetComponent<RecipeManager>().InstantiateRecipeObject(right_order_id);
+
+		VisibleOrderManager.GetComponent<VisibleOrderManager>().PushNewPlate(1);
 	}
 
 	public GameObject GetLeftOrder(){
@@ -124,6 +143,30 @@ public class OrderManager : MonoBehaviour {
 	public GameObject GetRightOrder(){
 		GameObject right_order = RightOrder;
 		return right_order;
+	}
+
+	public bool GetLeftPlayerShot(){
+		bool left_player_shot = LeftPlayerShot;
+		return left_player_shot;
+	}
+
+	public bool GetRightPlayerShot(){
+		bool right_player_shot = RightPlayerShot;
+		return right_player_shot;
+	}
+
+	public void OrderSent(bool left_order){
+
+		GameObject order_object = new GameObject();
+
+		if (left_order){
+			order_object = LeftOrder;
+		}
+		else if (!left_order){
+			order_object = RightOrder;
+		}
+
+		ClientManager.GetComponent<ClientManager>().TriggerClientServed(left_order);
 	}
 	
 	// Update is called once per frame
@@ -145,6 +188,12 @@ public class OrderManager : MonoBehaviour {
 				}
 			}
 		}
+		else if (LeftHasOrder){
+
+			if (ClientManager.GetComponent<ClientManager>().GetLeftClientObjectAtCounter().GetComponent<ClientObject>().GetIsShooting()){
+				LeftPlayerShot = true;
+			}
+		}
 
 		if (!RightHasOrder){
 
@@ -155,6 +204,12 @@ public class OrderManager : MonoBehaviour {
 					RightHasOrder = true;
 					InstantiateRightOrder();
 				}
+			}
+		}
+		else if (RightHasOrder){
+			
+			if (ClientManager.GetComponent<ClientManager>().GetRightClientObjectAtCounter().GetComponent<ClientObject>().GetIsShooting()){
+				RightPlayerShot = true;
 			}
 		}
 	}

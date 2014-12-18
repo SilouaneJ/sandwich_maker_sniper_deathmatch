@@ -37,12 +37,16 @@ public class VisibleOrderManager : MonoBehaviour
 	GameObject OrderPrefab;
 	VisibleOrder[] VisibleOrders;
 
+	[ SerializeField ] GameObject[]
+		OrderStartPosition = new GameObject[2],
+		OrderEndPosition = new GameObject[2];
+
 	// Use this for initialization
 	void Start ()
 	{
 		VisibleOrders = new VisibleOrder[2];
-		VisibleOrders [0] = new VisibleOrder (new Vector3 (-0.19f, -0.32f, -0.8f), new Vector3 (-0.5f, -0.32f, -0.8f), OrderPrefab);
-		VisibleOrders [1] = new VisibleOrder (new Vector3 (0.19f, -0.32f, -0.8f), new Vector3 (0.5f, -0.32f, -0.8f), OrderPrefab);
+		VisibleOrders [0] = new VisibleOrder (OrderStartPosition[0].transform.position,OrderEndPosition[0].transform.position,OrderPrefab);
+		VisibleOrders [1] = new VisibleOrder (OrderStartPosition[1].transform.position,OrderEndPosition[1].transform.position,OrderPrefab);
 	}
 	
 	// Update is called once per frame
@@ -152,12 +156,12 @@ public class VisibleOrderManager : MonoBehaviour
 		return it_is_done;
 	}
 
-	void PushNewPlate(int player_index)
+	public void PushNewPlate(int player_index)
 	{
 		VisibleOrders[player_index].CurrentState = MoveState.StepIn;
 	}
 	
-	void PullOldPlate(int player_index)
+	public void PullOldPlate(int player_index)
 	{
 		VisibleOrders[player_index].CurrentState = MoveState.StepOut;
 		VisibleOrders [player_index].OrderObject.FreezeAllToppings ();
