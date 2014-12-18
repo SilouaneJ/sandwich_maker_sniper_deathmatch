@@ -163,11 +163,13 @@ public class AudioManager : MonoBehaviour
 		{
 			SourceTable[FollowingSource].clip = MusicTable [CurrentMusic];
 			SourceTable[FollowingSource].Play ();
+			Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 		}
 		else
 		{
 			SourceTable[CurrentSource].clip = MusicTable [CurrentMusic];
 			SourceTable[CurrentSource].Play ();
+			Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 		}
 	}
 
@@ -188,6 +190,8 @@ public class AudioManager : MonoBehaviour
 
 		CurrentMusic = FollowingtMusic;
 		FollowingtMusic = -1;
+
+		Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 	}
 
 	public void PreviousMusic()
@@ -207,6 +211,8 @@ public class AudioManager : MonoBehaviour
 
 		CurrentMusic = FollowingtMusic;
 		FollowingtMusic = -1;
+
+		Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 	}
 
 	public void PlaySfx(SFX audio_sfx)
