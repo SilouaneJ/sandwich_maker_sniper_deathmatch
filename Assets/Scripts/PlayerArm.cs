@@ -27,6 +27,7 @@ public class PlayerArm : MonoBehaviour
 	private string ForwardAxisName, SideAxisName, GrabDropButtonName, BumpButtonName, SlapButtonName;
 	private bool LastGrabDropButtonPressed, LastBumpButtonPressed, LastSlapButtonPressed;
 	public Vector2 MinBound, MaxBound;
+	[SerializeField]
 	private float NormalArmSpeed = 1.0f;
 	private float MaxBumpStartVerticalSpeed = 2.5f;
 	private float BumpStartVerticalAcceleration = 5.5f;
