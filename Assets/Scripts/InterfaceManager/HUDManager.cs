@@ -46,6 +46,8 @@ public class HUDManager : MonoBehaviour {
 		HUDObject = Instantiate(HUDObjectPrefab,this.transform.position,Quaternion.identity) as GameObject;
 		HUDObject.transform.parent = this.transform;
 		HUDObject.name = "HUD_Object";
+
+		HUDObject.GetComponent<HUDObject>().SetUpHUDObject();
 	}
 
 	public void StartHUDManager(){
@@ -101,5 +103,15 @@ public class HUDManager : MonoBehaviour {
 	public void UpdateHUDManager(){
 
 
+	}
+
+	public void UpdateHUDScore(bool left_player, int score_update){
+
+		if (left_player){
+			HUDObject.GetComponent<HUDObject>().UpdateLeftScore(score_update);
+		}
+		else if (!left_player){
+			HUDObject.GetComponent<HUDObject>().UpdateRightScore(score_update);
+		}
 	}
 }

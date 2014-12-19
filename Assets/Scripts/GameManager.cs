@@ -97,14 +97,14 @@ public class GameManager : MonoBehaviour
 					GameIsOver = true;
 
 					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
-					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(OrderManager);
+					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(true,OrderManager);
 				}
 				else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
 				{
 					GameIsOver = false;
 					
 					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
-					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(OrderManager);
+					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(false,OrderManager);
 				}
 			}
 			else if (GameIsOver){

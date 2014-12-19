@@ -30,6 +30,10 @@ public class OrderManager : MonoBehaviour {
 		LeftPlayerShot,
 		RightPlayerShot;
 
+	int
+		LeftPlayerScore,
+		RightPlayerScore;
+
 	GameManager GameManager;
 
 	// Use this for initialization
@@ -172,18 +176,38 @@ public class OrderManager : MonoBehaviour {
 		return right_player_shot;
 	}
 
+	public int GetLeftPlayerScore(){
+		int left_player_score = LeftPlayerScore;
+		return left_player_score;
+	}
+
+	public int GetRightPlayerScore(){
+		int right_player_score = RightPlayerScore;
+		return right_player_score;
+	}
+
 	public void OrderSent(bool left_order){
+
 		GameManager.PlaySfx (SFX.Money);
 
 		if (left_order){
+			
+			LeftPlayerScore += LeftOrder.GetComponent<RecipeObject>().GetRecipeScore();
+
 			LeftHasOrder = false;
 			ResetLeftOrder();
 			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().ResetLeftOrder();
+			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().UpdateHUDScore(true,LeftPlayerScore);
 		}
 		else if (!left_order){
+			
+			RightPlayerScore += RightOrder.GetComponent<RecipeObject>().GetRecipeScore();
+
 			RightHasOrder = false;
 			ResetRightOrder();
 			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().ResetRightOrder();
+			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().UpdateHUDScore(false,RightPlayerScore);
+
 		}
 
 		Debug.Log(LeftHasOrder);

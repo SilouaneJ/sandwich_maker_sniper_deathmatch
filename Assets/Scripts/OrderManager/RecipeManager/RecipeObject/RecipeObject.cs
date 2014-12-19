@@ -18,6 +18,9 @@ public class RecipeObject : MonoBehaviour {
 	string[]
 		IngredientsList = new string[10];
 
+	[ SerializeField ] int
+		RecipeScore;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -82,6 +85,11 @@ public class RecipeObject : MonoBehaviour {
 	public string[] GetIngredientsList(){
 		string[] ingredients_list = IngredientsList;
 		return ingredients_list;
+	}
+
+	public int GetRecipeScore(){
+		int recipe_score = RecipeScore;
+		return recipe_score;
 	}
 	
 	// Update is called once per frame
