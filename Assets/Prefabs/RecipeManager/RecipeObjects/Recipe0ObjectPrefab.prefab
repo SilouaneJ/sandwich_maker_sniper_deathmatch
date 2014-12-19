@@ -52,6 +52,7 @@ MonoBehaviour:
   - 
   - 
   - 
+  RecipeScore: 125
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

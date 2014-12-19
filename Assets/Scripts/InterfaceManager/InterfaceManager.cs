@@ -13,6 +13,9 @@ public class InterfaceManager : MonoBehaviour {
 		InHUD,
 		InScore;
 
+	bool
+		HasScore;
+
 	// Use this for initialization
 	void Start () {
 
@@ -23,6 +26,8 @@ public class InterfaceManager : MonoBehaviour {
 		InMain = false;
 		InHUD = false;
 		InScore = false;
+
+		HasScore = false;
 
 		HUDManager.GetComponent<HUDManager>().SetUpHUDManager();
 		MainManager.GetComponent<MainManager>().SetUpMainManager();
@@ -51,14 +56,20 @@ public class InterfaceManager : MonoBehaviour {
 
 	public void LaunchScore(bool left_player_dead,GameObject order_manager){
 
-		int left_player_score = order_manager.GetComponent<OrderManager>().GetLeftPlayerScore();
-		int right_player_score = order_manager.GetComponent<OrderManager>().GetRightPlayerScore();
+		if (!HasScore){
 
-		ScoreManager.GetComponent<ScoreManager>().StartScoreManager(left_player_dead,left_player_score,right_player_score);
+			int left_player_score = order_manager.GetComponent<OrderManager>().GetLeftPlayerScore();
+			int right_player_score = order_manager.GetComponent<OrderManager>().GetRightPlayerScore();
+
+			ScoreManager.GetComponent<ScoreManager>().StartScoreManager(left_player_dead,left_player_score,right_player_score);
+
+			HasScore = true;
+		}
 	}
 
 	public void ResetScore(){
 
+		HasScore = false;
 		ScoreManager.GetComponent<ScoreManager>().ResetScoreManager();
 	}
 
