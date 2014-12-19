@@ -27,6 +27,9 @@ public class ClientManager : MonoBehaviour {
 	[ SerializeField ] float[]
 		QueueTimer = new float[5];
 
+	[ SerializeField ] float
+		QueueOffset;
+
 	float
 		LeftClock,
 		RightClock;
@@ -209,7 +212,7 @@ public class ClientManager : MonoBehaviour {
 				InstantiateClient(true,LeftStartTrigger.transform.position,LeftQueue);
 			}
 
-			LeftClock = 0.0f;
+			LeftClock = 0.0f + Random.Range(0.0f,QueueOffset);
 		}
 
 		if (RightClock >= QueueTimer[RightAmount]){
@@ -218,7 +221,7 @@ public class ClientManager : MonoBehaviour {
 				InstantiateClient(false,RightStartTrigger.transform.position,RightQueue);
 			}
 			
-			RightClock = 0.0f;
+			RightClock = 0.0f + Random.Range(0.0f,QueueOffset);
 		}
 
 		for (int i=0; i < 10; i++){

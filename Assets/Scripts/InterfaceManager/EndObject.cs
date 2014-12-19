@@ -33,7 +33,7 @@ public class EndObject : MonoBehaviour {
 			RightKillImage.GetComponent<Image>().enabled = false;
 			RightBloodImage.GetComponent<Image>().enabled = false;
 
-			EndTitle.GetComponent<Text>().text = "Player 1 wins!";
+			EndTitle.GetComponent<Text>().text = "Player 2 wins!";
 		}
 		else if (!left_player_dead){
 
@@ -42,7 +42,7 @@ public class EndObject : MonoBehaviour {
 			RightKillImage.GetComponent<Image>().enabled = true;
 			RightBloodImage.GetComponent<Image>().enabled = true;
 
-			EndTitle.GetComponent<Text>().text = "Player 2 wins!";
+			EndTitle.GetComponent<Text>().text = "Player 1 wins!";
 		}
 
 		LeftScoreWhite.GetComponent<Text>().text = left_player_score.ToString();

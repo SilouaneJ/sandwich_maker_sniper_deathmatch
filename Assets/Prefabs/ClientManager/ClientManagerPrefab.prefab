@@ -341,6 +341,7 @@ MonoBehaviour:
   - 11
   - 15
   - 21
+  QueueOffset: 2.20000005
   LeftStartTrigger: {fileID: 100004}
   RightStartTrigger: {fileID: 100006}
   LeftEndTrigger: {fileID: 100010}
