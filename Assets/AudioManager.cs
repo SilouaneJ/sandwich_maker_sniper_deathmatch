@@ -178,12 +178,14 @@ public class AudioManager : MonoBehaviour
 		{
 			SourceTable[FollowingSource].clip = MusicTable [CurrentMusic];
 			SourceTable[FollowingSource].Play ();
+			CancelInvoke("NextMusic");
 			Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 		}
 		else
 		{
 			SourceTable[CurrentSource].clip = MusicTable [CurrentMusic];
 			SourceTable[CurrentSource].Play ();
+			CancelInvoke("NextMusic");
 			Invoke("NextMusic", SourceTable[CurrentSource].clip.length - 5.0f);
 		}
 	}
@@ -218,6 +220,7 @@ public class AudioManager : MonoBehaviour
 		CurrentMusic = FollowingtMusic;
 		FollowingtMusic = -1;
 
+		CancelInvoke("NextMusic");
 		Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 	}
 
@@ -239,6 +242,7 @@ public class AudioManager : MonoBehaviour
 		CurrentMusic = FollowingtMusic;
 		FollowingtMusic = -1;
 
+		CancelInvoke("NextMusic");
 		Invoke("NextMusic", SourceTable[FollowingSource].clip.length - 5.0f);
 	}
 

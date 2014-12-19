@@ -50,8 +50,8 @@ public class PlayerArm : MonoBehaviour
 		ForwardAxisName = "VerticalP" + PlayerIndex;
 		SideAxisName = "HorizontalP" + PlayerIndex;
 		GrabDropButtonName = "Fire1P" + PlayerIndex;
-		BumpButtonName = "Fire2P" + PlayerIndex;
-		SlapButtonName = "JumpP" + PlayerIndex;
+		BumpButtonName = "JumpP" + PlayerIndex;
+		SlapButtonName = "Fire3P" + PlayerIndex;
 		ArmRigidBody = this.GetComponent< Rigidbody > ();
 		LastGrabDropButtonPressed = false;
 		LastBumpButtonPressed = false;

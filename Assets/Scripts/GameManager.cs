@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 			}
 			else if (GameIsOver){
 
-				if(Input.GetKey ("p"))
+				if(Input.GetKey ("p") || Input.GetButton("Fire1P1") || Input.GetButton("Fire1P2"))
 				{
 					StopGame();
 				}
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			if(Input.GetKey ("o"))
+			if(Input.GetKey ("o") || Input.GetButton("Fire1P1") || Input.GetButton("Fire1P2"))
 			{
 				StartGame();
 			}
