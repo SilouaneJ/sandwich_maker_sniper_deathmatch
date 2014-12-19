@@ -118,6 +118,15 @@ public class GameManager : MonoBehaviour
 		{
 			AudioManager.NextMusic();
 		}
+
+		if(Input.GetAxis("Trigger1P1") <= -1 || Input.GetAxis("Trigger1P2") <= -1)
+		{
+			AudioManager.NextMusic();
+		}
+		else if(Input.GetAxis("Trigger1P1") >= 1 || Input.GetAxis("Trigger1P2") >= 1)
+		{
+			AudioManager.PreviousMusic();
+		}
 	}
 
 	void StartGame()
