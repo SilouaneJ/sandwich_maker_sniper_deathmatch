@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 	GameObject AudioManagerObject;
 	AudioManager AudioManager;
 
+	float InMenuTimer;
+
 	bool
 		GameIsStarted,
 		GameIsOver;
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
 
 		InterfaceManager.GetComponent<InterfaceManager>().SetUpInterfaceManager();
 		InterfaceManager.GetComponent<InterfaceManager>().LaunchMain();
+
+		InMenuTimer = 50.0f;
 	}
 
 	public void InstantiateOrderManager(){
@@ -95,13 +99,15 @@ public class GameManager : MonoBehaviour
 				if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
 				{
 					GameIsOver = true;
+					PlaySfx(SFX.Gun);
 
 					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
 					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(true,OrderManager);
 				}
 				else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
 				{
-					GameIsOver = false;
+					GameIsOver = true;
+					PlaySfx(SFX.Gun);
 					
 					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
 					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(false,OrderManager);
@@ -112,12 +118,14 @@ public class GameManager : MonoBehaviour
 				if(Input.GetKey ("p") || Input.GetButton("Fire1P1") || Input.GetButton("Fire1P2"))
 				{
 					StopGame();
+					InMenuTimer = 0.0f;
 				}
 			}
 		}
 		else
 		{
-			if(Input.GetKey ("o") || Input.GetButton("Fire1P1") || Input.GetButton("Fire1P2"))
+			InMenuTimer += Time.deltaTime;
+			if((Input.GetKey ("o") || Input.GetButton("Fire1P1") || Input.GetButton("Fire1P2")) && InMenuTimer >= 2.0f)
 			{
 				StartGame();
 			}
@@ -151,6 +159,7 @@ public class GameManager : MonoBehaviour
 		AudioManager.PlayMusic ();
 
 		GameIsStarted = true;
+		GameIsOver = false;
 
 		InterfaceManager.GetComponent<InterfaceManager>().ResetMain();
 		InterfaceManager.GetComponent<InterfaceManager>().LaunchHUD();
@@ -176,6 +185,7 @@ public class GameManager : MonoBehaviour
 		Destroy (Order);
 
 		GameIsStarted = false;
+		GameIsOver = false;
 
 		InterfaceManager.GetComponent<InterfaceManager>().ResetScore();
 		InterfaceManager.GetComponent<InterfaceManager>().LaunchMain();
