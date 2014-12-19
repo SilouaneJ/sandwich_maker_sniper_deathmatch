@@ -61,15 +61,24 @@ public class ClientObject : MonoBehaviour {
 
 		CurrentState = 0;
 
-		UpdateClientState(CurrentState);
+		for (int i=0; i < MaximumState; i++){
+			ClientStates[i].GetComponent<ObjectScaleScript>().SetUpScale();
+		}
+
+		UpdateClientState(CurrentState,false);
 	}
 
-	public void UpdateClientState(int new_client_state){
+	public void UpdateClientState(int new_client_state, bool with_effect){
 
 		for (int i=0; i < ClientStates.Length; i++){
 
 			if (i == new_client_state){
+
 				ClientStates[i].renderer.enabled = true;
+
+				if (with_effect){
+					ClientStates[i].GetComponent<ObjectScaleScript>().TriggerLoopingScale(1.0f);
+				}
 			}
 			else if (i != new_client_state){
 				ClientStates[i].renderer.enabled = false;
@@ -146,7 +155,7 @@ public class ClientObject : MonoBehaviour {
 
 				}
 
-				UpdateClientState(CurrentState);
+				UpdateClientState(CurrentState,true);
 			}
 		}
 	}

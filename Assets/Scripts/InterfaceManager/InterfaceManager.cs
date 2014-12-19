@@ -49,9 +49,14 @@ public class InterfaceManager : MonoBehaviour {
 		HUDManager.GetComponent<HUDManager>().ResetHUDManager();
 	}
 
-	public void LaunchScore(){
+	public void LaunchScore(GameObject order_manager){
 
 		ScoreManager.GetComponent<ScoreManager>().StartScoreManager(false,500,1500);
+	}
+
+	public void ResetScore(){
+
+		ScoreManager.GetComponent<ScoreManager>().ResetScoreManager();
 	}
 
 	public GameObject GetHUDManager(){

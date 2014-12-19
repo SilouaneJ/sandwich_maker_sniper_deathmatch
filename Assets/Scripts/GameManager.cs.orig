@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
@@ -40,13 +40,24 @@ public class GameManager : MonoBehaviour
 	[ SerializeField ] GameObject
 		InterfaceManager;
 
+	[SerializeField]
+	GameObject AudioManagerPrefab;
+	GameObject AudioManagerObject;
+	AudioManager AudioManager;
+
 	bool GameIsStarted;
+	bool GameIsOver;
 
 	void Start ()
 	{
 		GameIsStarted = false;
+		GameIsOver = false;
+
+		AudioManagerObject = (GameObject)Instantiate (AudioManagerPrefab);
+		AudioManager = AudioManagerObject.GetComponent< AudioManager > ();
 
 		InterfaceManager.GetComponent<InterfaceManager>().SetUpInterfaceManager();
+		InterfaceManager.GetComponent<InterfaceManager>().LaunchMain();
 	}
 
 	public void InstantiateOrderManager(){
@@ -55,7 +66,7 @@ public class GameManager : MonoBehaviour
 		OrderManager.transform.parent = this.transform;
 		OrderManager.name = "Order_Manager";
 
-		OrderManager.GetComponent<OrderManager>().SetUpOrderManager(VisibleOrderManager);
+		OrderManager.GetComponent<OrderManager>().SetUpOrderManager(InterfaceManager,VisibleOrderManager);
 		OrderManager.GetComponent<OrderManager>().StartOrderManager();
 		
 		Order = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
@@ -76,29 +87,43 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-<<<<<<< Updated upstream
-		if(GameIsStarted)
-=======
-
-		if (Input.GetKeyDown("a")){
-			TriggerOrderSent(true);
-		}
-
-		if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
->>>>>>> Stashed changes
+		if (GameIsStarted)
 		{
+<<<<<<< Updated upstream
 			if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
 			{
-
+				PlaySfx(SFX.Gun);
+				StopGame();
 			}
 			else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
 			{
-
-			}
-
-			if(Input.GetKey ("p"))
-			{
+				PlaySfx(SFX.Gun);
 				StopGame();
+=======
+			if (!GameIsOver){
+
+				if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
+				{
+					GameIsOver = true;
+
+					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
+					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(OrderManager);
+				}
+				else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
+				{
+					GameIsOver = false;
+					
+					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
+					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(OrderManager);
+				}
+>>>>>>> Stashed changes
+			}
+			else if (GameIsOver){
+
+				if(Input.GetKey ("p"))
+				{
+					StopGame();
+				}
 			}
 		}
 		else
@@ -107,6 +132,24 @@ public class GameManager : MonoBehaviour
 			{
 				StartGame();
 			}
+		}
+
+		if(Input.GetKeyUp("left"))
+		{
+			AudioManager.PreviousMusic();
+		}
+		else if(Input.GetKeyUp("right"))
+		{
+			AudioManager.NextMusic();
+		}
+
+		if(Input.GetAxis("Trigger1P1") <= -1 || Input.GetAxis("Trigger1P2") <= -1)
+		{
+			AudioManager.NextMusic();
+		}
+		else if(Input.GetAxis("Trigger1P1") >= 1 || Input.GetAxis("Trigger1P2") >= 1)
+		{
+			AudioManager.PreviousMusic();
 		}
 	}
 
@@ -125,13 +168,24 @@ public class GameManager : MonoBehaviour
 		
 		InstantiateOrderManager();
 
+		AudioManager.PlayMusic ();
+
 		GameIsStarted = true;
+
+		InterfaceManager.GetComponent<InterfaceManager>().ResetMain();
+		InterfaceManager.GetComponent<InterfaceManager>().LaunchHUD();
+	}
+
+	void StartScore(){
+
 	}
 
 	void StopGame()
 	{
+		AudioManager.StopMusic ();
 		this.GetComponent<SpawnManager> ().DestroyAll ();
 		VisibleOrderManager.GetComponent< VisibleOrderManager > ().DestroyAll ();
+		OrderManager.GetComponent< OrderManager > ().ResetOrderManager ();
 		Destroy(ToppingDispenser[0]);
 		Destroy(ToppingDispenser[1]);
 		Destroy (ArmsManager);
@@ -142,5 +196,13 @@ public class GameManager : MonoBehaviour
 		Destroy (Order);
 
 		GameIsStarted = false;
+
+		InterfaceManager.GetComponent<InterfaceManager>().ResetScore();
+		InterfaceManager.GetComponent<InterfaceManager>().LaunchMain();
+	}
+
+	public void PlaySfx(SFX sfx_sound)
+	{
+		AudioManager.PlaySfx (sfx_sound);
 	}
 }

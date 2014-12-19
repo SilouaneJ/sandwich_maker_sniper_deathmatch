@@ -45,16 +45,20 @@ public class GameManager : MonoBehaviour
 	GameObject AudioManagerObject;
 	AudioManager AudioManager;
 
-	bool GameIsStarted;
+	bool
+		GameIsStarted,
+		GameIsOver;
 
 	void Start ()
 	{
 		GameIsStarted = false;
+		GameIsOver = false;
 
 		AudioManagerObject = (GameObject)Instantiate (AudioManagerPrefab);
 		AudioManager = AudioManagerObject.GetComponent< AudioManager > ();
 
 		InterfaceManager.GetComponent<InterfaceManager>().SetUpInterfaceManager();
+		InterfaceManager.GetComponent<InterfaceManager>().LaunchMain();
 	}
 
 	public void InstantiateOrderManager(){
@@ -86,20 +90,29 @@ public class GameManager : MonoBehaviour
 	{
 		if (GameIsStarted)
 		{
-			if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
-			{
-				PlaySfx(SFX.Gun);
-				StopGame();
-			}
-			else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
-			{
-				PlaySfx(SFX.Gun);
-				StopGame();
-			}
+			if (!GameIsOver){
 
-			if(Input.GetKey ("p"))
-			{
-				StopGame();
+				if (OrderManager.GetComponent<OrderManager>().GetLeftPlayerShot())
+				{
+					GameIsOver = true;
+
+					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
+					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(OrderManager);
+				}
+				else if (OrderManager.GetComponent<OrderManager>().GetRightPlayerShot())
+				{
+					GameIsOver = false;
+					
+					InterfaceManager.GetComponent<InterfaceManager>().ResetHUD();
+					InterfaceManager.GetComponent<InterfaceManager>().LaunchScore(OrderManager);
+				}
+			}
+			else if (GameIsOver){
+
+				if(Input.GetKey ("p"))
+				{
+					StopGame();
+				}
 			}
 		}
 		else
@@ -108,15 +121,6 @@ public class GameManager : MonoBehaviour
 			{
 				StartGame();
 			}
-		}
-
-		if(Input.GetKeyUp("left"))
-		{
-			AudioManager.PreviousMusic();
-		}
-		else if(Input.GetKeyUp("right"))
-		{
-			AudioManager.NextMusic();
 		}
 
 		if(Input.GetAxis("Trigger1P1") <= -1 || Input.GetAxis("Trigger1P2") <= -1)
@@ -148,7 +152,12 @@ public class GameManager : MonoBehaviour
 
 		GameIsStarted = true;
 
+		InterfaceManager.GetComponent<InterfaceManager>().ResetMain();
 		InterfaceManager.GetComponent<InterfaceManager>().LaunchHUD();
+	}
+
+	void StartScore(){
+
 	}
 
 	void StopGame()
@@ -167,6 +176,9 @@ public class GameManager : MonoBehaviour
 		Destroy (Order);
 
 		GameIsStarted = false;
+
+		InterfaceManager.GetComponent<InterfaceManager>().ResetScore();
+		InterfaceManager.GetComponent<InterfaceManager>().LaunchMain();
 	}
 
 	public void PlaySfx(SFX sfx_sound)
