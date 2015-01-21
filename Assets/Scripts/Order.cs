@@ -29,7 +29,7 @@ public class Order : MonoBehaviour
 	{
 		if(TopBunIndex != -1 && !ToppingTable[TopBunIndex].GetComponent<Topping>().ItIsInHand)
 		{
-			GameManager.TriggerOrderSent(ItIsLeft);
+			GameManager.TriggerOrderSent(ItIsLeft, GetCurrentBurgerIngredients());
 			TopBunIndex = -1;
 		}
 	}
@@ -83,5 +83,39 @@ public class Order : MonoBehaviour
 
 		ToppingTable.Clear ();
 		TopBunIndex = -1;
+	}
+
+	private string[] GetCurrentBurgerIngredients()
+	{
+		string[]
+			result;
+		int
+			ingredient_count,
+			ingredient_index;;
+
+		ingredient_count = 0;
+		ingredient_index = 0;
+
+		foreach(GameObject topping in ToppingTable)
+		{
+			if ( topping.GetComponent<Topping>().GetName() != "bun" )
+			{
+				++ingredient_count;
+			}
+		}
+
+		result = new string[ingredient_count];
+
+		foreach(GameObject topping in ToppingTable)
+		{
+			string ingredient_name = topping.GetComponent<Topping>().GetName();
+			if ( ingredient_name != "bun" )
+			{
+				result[ingredient_index] = ingredient_name;
+				++ingredient_index;
+			}
+		}
+
+		return result;
 	}
 }

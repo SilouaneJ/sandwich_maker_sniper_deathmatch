@@ -186,13 +186,21 @@ public class OrderManager : MonoBehaviour {
 		return right_player_score;
 	}
 
-	public void OrderSent(bool left_order){
+	public void OrderSent(bool left_order, string[] ingredient_list){
 
 		GameManager.PlaySfx (SFX.Money);
 
 		if (left_order){
-			
-			LeftPlayerScore += LeftOrder.GetComponent<RecipeObject>().GetRecipeScore();
+
+			if(IsRecipeGood(ingredient_list, LeftOrder.GetComponent<RecipeObject>().GetRecipeIngredientList()))
+			{
+				Debug.Log("Good");
+				LeftPlayerScore += LeftOrder.GetComponent<RecipeObject>().GetRecipeScore();
+			}
+			else
+			{
+				Debug.Log("Not good");
+			}
 
 			LeftHasOrder = false;
 			ResetLeftOrder();
@@ -200,8 +208,11 @@ public class OrderManager : MonoBehaviour {
 			InterfaceManager.GetComponent<InterfaceManager>().GetHUDManager().GetComponent<HUDManager>().UpdateHUDScore(true,LeftPlayerScore);
 		}
 		else if (!left_order){
-			
-			RightPlayerScore += RightOrder.GetComponent<RecipeObject>().GetRecipeScore();
+
+			if(IsRecipeGood(ingredient_list, RightOrder.GetComponent<RecipeObject>().GetRecipeIngredientList()))
+			{
+				RightPlayerScore += RightOrder.GetComponent<RecipeObject>().GetRecipeScore();
+			}
 
 			RightHasOrder = false;
 			ResetRightOrder();
@@ -276,5 +287,62 @@ public class OrderManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	bool IsRecipeGood(string[] ingredient_list, string[] recipe_ingredient_list)
+	{
+		string[] no_repetition_ingredient_list;
+		int[] amount_list;
+		int unique_ingredient_count, ingredient_index;
+
+		unique_ingredient_count = 0;
+		ingredient_index = 0;
+
+		for (int i = 0; i < recipe_ingredient_list.Length; ++i)
+		{
+			if (i == 0 || recipe_ingredient_list[i] != recipe_ingredient_list[i - 1])
+			{
+				++unique_ingredient_count;
+			}
+		}
+
+		no_repetition_ingredient_list = new string[unique_ingredient_count];
+		amount_list = new int[unique_ingredient_count];
+
+		for (int i = 0; i < recipe_ingredient_list.Length; ++i)
+		{
+			if (i == 0 || recipe_ingredient_list[i] != recipe_ingredient_list[i - 1])
+			{
+				no_repetition_ingredient_list[ingredient_index] = recipe_ingredient_list[i];
+				amount_list[ingredient_index] = 1;
+				++ingredient_index;
+			}
+			else
+			{
+				++amount_list[ingredient_index - 1];
+			}
+		}
+
+		for(int i = 0; i < no_repetition_ingredient_list.Length; ++i)
+		{
+			int current_ingredient_count;
+
+			current_ingredient_count = 0;
+
+			for(int j = 0; j < ingredient_list.Length; ++j)
+			{
+				if(no_repetition_ingredient_list[i] == ingredient_list[j])
+				{
+					++current_ingredient_count;
+				}
+			}
+
+			if (amount_list[i] != current_ingredient_count)
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

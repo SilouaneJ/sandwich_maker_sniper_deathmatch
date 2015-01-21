@@ -77,9 +77,9 @@ public class GameManager : MonoBehaviour
 		Order = (GameObject)Instantiate (OrderPrefab, new Vector3(-0.19f, -0.32f, -0.8f), Quaternion.identity);
 	}
 
-	public void TriggerOrderSent(bool left_order_sent)
+	public void TriggerOrderSent(bool left_order_sent, string[] ingredient_list)
 	{
-		OrderManager.GetComponent<OrderManager>().OrderSent(left_order_sent);
+		OrderManager.GetComponent<OrderManager>().OrderSent(left_order_sent, ingredient_list);
 
 		if (left_order_sent){
 			VisibleOrderManager.GetComponent<VisibleOrderManager>().PullOldPlate(0);
