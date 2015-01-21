@@ -16,6 +16,13 @@ public class Order : MonoBehaviour
 		TopBunIndex = -1;
 		GameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent< GameManager >();
 	}
+
+	public string[] GetToppingContent(){
+
+		string[] topping_content = new string[50];
+
+		return topping_content;
+	}
 	
 	// Update is called once per frame
 	void Update ()
