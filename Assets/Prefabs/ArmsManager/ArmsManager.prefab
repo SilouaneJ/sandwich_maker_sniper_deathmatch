@@ -842,6 +842,7 @@ MonoBehaviour:
   OtherPlayer: {fileID: 11400004}
   MinBound: {x: -.360000014, y: -.349999994}
   MaxBound: {x: .439999998, y: .0199999996}
+  NormalArmSpeed: 1.53999996
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -874,6 +875,7 @@ MonoBehaviour:
   OtherPlayer: {fileID: 11400000}
   MinBound: {x: -.460000008, y: -.349999994}
   MaxBound: {x: .360000014, y: .0199999996}
+  NormalArmSpeed: 1.53999996
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
