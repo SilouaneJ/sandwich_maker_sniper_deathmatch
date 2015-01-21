@@ -96,4 +96,37 @@ public class RecipeObject : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public string[] GetRecipeIngredientList()
+	{
+		string[]
+			result;
+		int
+			ingredient_count,
+			ingredient_index;
+
+		ingredient_count = 0;
+		ingredient_index = 0;
+
+		for(int i = 0; i < IngredientsAmount.Length; ++i)
+		{
+			ingredient_count += IngredientsAmount[ i ];
+		}
+
+		result = new string[ingredient_count];
+
+		for(int i = 0; i < IngredientsList.Length; ++i)
+		{
+			if (IngredientsList[i] != "nothing")
+            {
+				for(int j = 0; j < IngredientsAmount[i]; ++j)
+				{
+					result[ingredient_index] = IngredientsList[i];
+					++ingredient_index;
+				}
+			}
+		}
+
+		return result;
+	}
 }

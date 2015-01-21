@@ -7,7 +7,11 @@ public enum ToppingType
 	LETTUCE,
 	CHEESE,
 	BUN,
-	PATTY
+	PATTY,
+	PICKLE,
+	JALAPENO,
+	BACON,
+	ONION
 }
 
 public class Topping : MonoBehaviour
@@ -22,6 +26,68 @@ public class Topping : MonoBehaviour
 	public ToppingType Type
 	{ 
 		get { return _Type; }		
+	}
+
+	public string GetName()
+	{
+		switch ( _Type )
+		{
+			case ToppingType.BUN :
+			{
+				return "bun";
+			}
+			break;
+
+			case ToppingType.CHEESE :
+			{
+				return "cheese";
+			}
+			break;
+
+			case ToppingType.LETTUCE :
+			{
+				return "salad";
+			}
+			break;
+
+			case ToppingType.PATTY :
+			{
+				return "burger";
+			}
+			break;
+
+			case ToppingType.TOMATO :
+			{
+				return "tomato";
+			}
+			break;
+
+			case ToppingType.BACON :
+			{
+				return "bacon";
+			}
+			break;
+
+			case ToppingType.JALAPENO :
+			{
+				return "jalapenos";
+			}
+			break;
+
+			case ToppingType.ONION :
+			{
+				return "onion";
+			}
+			break;
+
+			case ToppingType.PICKLE :
+			{
+				return "pickle";
+			}
+			break;
+		}
+
+		return "";
 	}
 }
 
