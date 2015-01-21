@@ -196,22 +196,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .75, g: .75, b: .75, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
+    m_FontSize: 84
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 5
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Made in 5 days for the Fishing Cactus - Internal Game Jam
-
-'
+  m_Text: Made in 5 days for the 2014 Internal Game Jam @ Fishing Cactus
 --- !u!114 &11472380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,18 +404,18 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
+    m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 5
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Guillaume Bouckaert - Fabrice Daniel - Thomas Datoussaid - Silouane Jeanneteau
-    - Ferry Keeson
+  m_Text: "Guillaume Bouckaert\nFabrice Daniel\nThomas Datoussaid\nSilouane Jeanneteau
+    \nFerry Keeson"
 --- !u!222 &22272386
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -502,14 +500,14 @@ RectTransform:
   m_GameObject: {fileID: 172380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.01880884, y: 6.01880884, z: 6.01880884}
+  m_LocalScale: {x: .403485775, y: .403486162, z: .403486162}
   m_Children: []
   m_Father: {fileID: 22472386}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 295, y: -302}
-  m_SizeDelta: {x: 199, y: 12}
+  m_AnchoredPosition: {x: 632, y: -281}
+  m_SizeDelta: {x: 1526, y: 240}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22472384
 RectTransform:
@@ -645,14 +643,14 @@ RectTransform:
   m_GameObject: {fileID: 172398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.01880884, y: 6.01880884, z: 6.01880884}
+  m_LocalScale: {x: .45762068, y: .45762071, z: .45762071}
   m_Children: []
   m_Father: {fileID: 22472386}
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 291.5, y: -427}
-  m_SizeDelta: {x: 206, y: 28}
+  m_AnchoredPosition: {x: 781, y: -417}
+  m_SizeDelta: {x: 713, y: 484}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
 Prefab:

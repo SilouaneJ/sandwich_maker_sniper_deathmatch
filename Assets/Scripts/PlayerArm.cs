@@ -44,6 +44,9 @@ public class PlayerArm : MonoBehaviour
 	private BoxCollider LeftDisableDropCollider, RightDisableDropCollider;
 	private GameManager GameManager;
 
+	[ SerializeField ] GameObject
+		ArmModelObject;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -58,6 +61,8 @@ public class PlayerArm : MonoBehaviour
 		LastBumpButtonPressed = false;
 		LastSlapButtonPressed = false;
 		GameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent< GameManager >();
+
+		ArmModelObject.GetComponent<ObjectBlinkScript>().SetUpBlink();
 	}
 	
 	// Update is called once per frame
@@ -505,6 +510,8 @@ public class PlayerArm : MonoBehaviour
 			CurrentSpeed = 0.0f;
 			CurrentState = ActionState.Slapped;
 			this.GetComponentInParent<ArmsManager> ().RequestDropTopping(PlayerIndex-1);
+
+			ArmModelObject.GetComponent<ObjectBlinkScript>().LaunchBlink();
 		}
 	}
 }

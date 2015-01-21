@@ -171,6 +171,7 @@ GameObject:
   - 33: {fileID: 3300012}
   - 23: {fileID: 2300012}
   - 95: {fileID: 9500000}
+  - 114: {fileID: 11447568}
   m_Layer: 0
   m_Name: arm
   m_TagString: Untagged
@@ -189,6 +190,7 @@ GameObject:
   - 33: {fileID: 3300014}
   - 23: {fileID: 2300014}
   - 95: {fileID: 9500002}
+  - 114: {fileID: 11455066}
   m_Layer: 0
   m_Name: arm
   m_TagString: Untagged
@@ -843,6 +845,7 @@ MonoBehaviour:
   MinBound: {x: -.360000014, y: -.349999994}
   MaxBound: {x: .439999998, y: .0199999996}
   NormalArmSpeed: 1.53999996
+  ArmModelObject: {fileID: 100018}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -876,6 +879,33 @@ MonoBehaviour:
   MinBound: {x: -.460000008, y: -.349999994}
   MaxBound: {x: .360000014, y: .0199999996}
   NormalArmSpeed: 1.53999996
+  ArmModelObject: {fileID: 100020}
+--- !u!114 &11447568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a94a50583304370b0a3a6ebd6dce43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlinkMaterial: {fileID: 2100000, guid: 65a796d74e21949d4b16adb8108d7ecb, type: 2}
+  BlinkTimer: .200000003
+--- !u!114 &11455066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a94a50583304370b0a3a6ebd6dce43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlinkMaterial: {fileID: 2100000, guid: 65a796d74e21949d4b16adb8108d7ecb, type: 2}
+  BlinkTimer: .200000003
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
